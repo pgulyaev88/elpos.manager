@@ -4,3 +4,4 @@ managerCore::managerCore(QWidget *parent) :
     QWidget(parent)
 {
 }
+

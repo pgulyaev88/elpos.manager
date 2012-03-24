@@ -6,14 +6,86 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>700</width>
-    <height>620</height>
+    <width>327</width>
+    <height>262</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Dialog</string>
   </property>
+  <widget class="QWidget" name="gridLayoutWidget">
+   <property name="geometry">
+    <rect>
+     <x>20</x>
+     <y>20</y>
+     <width>281</width>
+     <height>181</height>
+    </rect>
+   </property>
+   <layout class="QGridLayout" name="gridLayout">
+    <item row="0" column="1">
+     <widget class="QLineEdit" name="streetNameLineEdit"/>
+    </item>
+    <item row="0" column="0">
+     <widget class="QLabel" name="streetNameLabel">
+      <property name="text">
+       <string>StreetName</string>
+      </property>
+     </widget>
+    </item>
+    <item row="1" column="1">
+     <widget class="QLineEdit" name="countHouseLineEdit"/>
+    </item>
+    <item row="1" column="0">
+     <widget class="QLabel" name="countHouseLabel">
+      <property name="text">
+       <string>CountHouse</string>
+      </property>
+     </widget>
+    </item>
+    <item row="2" column="1">
+     <widget class="QLineEdit" name="distanceLineEdit"/>
+    </item>
+    <item row="2" column="0">
+     <widget class="QLabel" name="distanceLabel">
+      <property name="text">
+       <string>Distance</string>
+      </property>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QDialogButtonBox" name="streetChangeButtonBox">
+   <property name="geometry">
+    <rect>
+     <x>140</x>
+     <y>220</y>
+     <width>161</width>
+     <height>25</height>
+    </rect>
+   </property>
+   <property name="standardButtons">
+    <set>QDialogButtonBox::Cancel|QDialogButtonBox::Ok</set>
+   </property>
+  </widget>
  </widget>
  <resources/>
- <connections/>
+ <connections>
+  <connection>
+   <sender>streetChangeButtonBox</sender>
+   <signal>rejected()</signal>
+   <receiver>streetChangeDialog</receiver>
+   <slot>close()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>220</x>
+     <y>232</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>163</x>
+     <y>130</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
 </ui>

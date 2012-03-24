@@ -15,6 +15,9 @@ public:
     explicit streetViewDialog(QWidget *parent = 0);
     ~streetViewDialog();
 
+private slots:
+    void getStreetList();
+
 private:
     Ui::streetViewDialog *ui;
 };

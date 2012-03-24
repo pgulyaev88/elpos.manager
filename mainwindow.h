@@ -23,6 +23,9 @@ public slots:
     void restaurantsViewDialogShow();
     void settingsViewDialogShow();
     void streetViewDialogShow();
+    void loadDatabaseConnection();
+
+protected:
 
 private:
     Ui::MainWindow *ui;

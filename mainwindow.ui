@@ -20,7 +20,7 @@
      <x>0</x>
      <y>0</y>
      <width>400</width>
-     <height>26</height>
+     <height>20</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFile">
@@ -37,6 +37,8 @@
     <addaction name="actionCategory"/>
     <addaction name="actionCurrency"/>
     <addaction name="actionRestaurants"/>
+    <addaction name="separator"/>
+    <addaction name="actionStreet"/>
    </widget>
    <widget class="QMenu" name="menuOptions">
     <property name="title">
@@ -112,6 +114,11 @@
    </property>
    <property name="shortcut">
     <string>Ctrl+Q</string>
+   </property>
+  </action>
+  <action name="actionStreet">
+   <property name="text">
+    <string>Street</string>
    </property>
   </action>
  </widget>
@@ -203,6 +210,22 @@
    <signal>triggered(bool)</signal>
    <receiver>MainWindow</receiver>
    <slot>settingsViewDialogShow()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>199</x>
+     <y>149</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>actionStreet</sender>
+   <signal>triggered(bool)</signal>
+   <receiver>MainWindow</receiver>
+   <slot>streetViewDialogShow()</slot>
    <hints>
     <hint type="sourcelabel">
      <x>-1</x>

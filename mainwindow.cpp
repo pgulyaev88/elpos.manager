@@ -2,6 +2,11 @@
 #include <QApplication>
 #include <QMessageBox>
 #include <QSettings>
+#include <QSqlDatabase>
+#include <QSqlQueryModel>
+#include <QSqlError>
+#include <QTableView>
+#include <QDebug>
 #include "categoriesviewdialog.h"
 #include "currencysviewdialog.h"
 #include "discountsviewdialog.h"
@@ -17,7 +22,20 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+    loadDatabaseConnection();
 }
+
+void MainWindow::loadDatabaseConnection(){
+    QSqlDatabase db = QSqlDatabase::addDatabase("QPSQL");
+    db.setHostName("127.0.0.1");
+    db.setDatabaseName("elpos");
+    db.setUserName("elpos");
+    db.setPassword("elpos");
+    if (!db.open()){
+        qDebug() << QObject::trUtf8("Database error connect") << db.lastError().text();
+    }
+}
+
 
 void MainWindow::menusViewDialogShow(){
     menusViewDialog dialog(this);

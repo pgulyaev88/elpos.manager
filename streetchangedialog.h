@@ -15,6 +15,11 @@ public:
     explicit streetChangeDialog(QWidget *parent = 0);
     ~streetChangeDialog();
 
+protected slots:
+    void newStreet();
+    void modStreet();
+
+
 private:
     Ui::streetChangeDialog *ui;
 };

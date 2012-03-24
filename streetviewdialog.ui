@@ -105,7 +105,7 @@
     </item>
    </layout>
   </widget>
-  <widget class="QTableWidget" name="tableWidget">
+  <widget class="QTableView" name="streetTableView">
    <property name="geometry">
     <rect>
      <x>10</x>
@@ -114,28 +114,37 @@
      <height>551</height>
     </rect>
    </property>
-   <column>
-    <property name="text">
-     <string>№</string>
-    </property>
-   </column>
-   <column>
-    <property name="text">
-     <string>StreetName</string>
-    </property>
-   </column>
-   <column>
-    <property name="text">
-     <string>CountHouse</string>
-    </property>
-   </column>
-   <column>
-    <property name="text">
-     <string>Distance</string>
-    </property>
-   </column>
+   <property name="lineWidth">
+    <number>3</number>
+   </property>
+   <property name="midLineWidth">
+    <number>1</number>
+   </property>
+   <property name="textElideMode">
+    <enum>Qt::ElideNone</enum>
+   </property>
+   <property name="gridStyle">
+    <enum>Qt::SolidLine</enum>
+   </property>
   </widget>
  </widget>
  <resources/>
- <connections/>
+ <connections>
+  <connection>
+   <sender>streetButtonBox</sender>
+   <signal>rejected()</signal>
+   <receiver>streetViewDialog</receiver>
+   <slot>close()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>569</x>
+     <y>590</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>349</x>
+     <y>309</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
 </ui>

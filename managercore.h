@@ -13,6 +13,7 @@ signals:
 
 public slots:
 
+
 };
 
 #endif // MANAGERCORE_H
