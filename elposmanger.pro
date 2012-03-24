@@ -4,7 +4,7 @@
 #
 #-------------------------------------------------
 
-QT       += core gui
+QT       += core gui sql
 
 TARGET = elposmanger
 TEMPLATE = app
@@ -12,39 +12,111 @@ TEMPLATE = app
 
 SOURCES += main.cpp\
         mainwindow.cpp \
-    settingsdialog.cpp \
-    menudialog.cpp \
-    menuchangedialog.cpp \
-    managercore.cpp \
-    discountdialog.cpp \
-    discountchangedialog.cpp \
-    categorydialog.cpp \
-    categorychangedialog.cpp \
-    carrencydialog.cpp \
-    carrencychangedialog.cpp
+    categoriesviewdialog.cpp \
+    currencysviewdialog.cpp \
+    menusviewdialog.cpp \
+    restaurantsviewdialog.cpp \
+    discountsviewdialog.cpp \
+    streetviewdialog.cpp \
+    categorieschangedialog.cpp \
+    currencyschangedialog.cpp \
+    discountschangedialog.cpp \
+    menuschangedialog.cpp \
+    restaurantschangedialog.cpp \
+    streetchangedialog.cpp
 
 HEADERS  += mainwindow.h \
-    settingsdialog.h \
-    menudialog.h \
-    menuchangedialog.h \
-    managercore.h \
-    discountdialog.h \
-    discountchangedialog.h \
-    categorydialog.h \
-    categorychangedialog.h \
-    carrencydialog.h \
-    carrencychangedialog.h
+    categoriesviewdialog.h \
+    currencysviewdialog.h \
+    menusviewdialog.h \
+    restaurantsviewdialog.h \
+    discountsviewdialog.h \
+    streetviewdialog.h \
+    categorieschangedialog.h \
+    currencyschangedialog.h \
+    discountschangedialog.h \
+    menuschangedialog.h \
+    restaurantschangedialog.h \
+    streetchangedialog.h
 
 FORMS    += mainwindow.ui \
-    settingsdialog.ui \
-    menudialog.ui \
-    menuchangedialog.ui \
-    discountdialog.ui \
-    discountchangedialog.ui \
-    categorydialog.ui \
-    categorychangedialog.ui \
-    carrencydialog.ui \
-    carrencychangedialog.ui
+    categoriesviewdialog.ui \
+    currencysviewdialog.ui \
+    menusviewdialog.ui \
+    restaurantsviewdialog.ui \
+    discountsviewdialog.ui \
+    streetviewdialog.ui \
+    categorieschangedialog.ui \
+    currencyschangedialog.ui \
+    discountschangedialog.ui \
+    menuschangedialog.ui \
+    restaurantschangedialog.ui \
+    streetchangedialog.ui
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
