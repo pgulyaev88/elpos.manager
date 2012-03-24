@@ -15,6 +15,15 @@ public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
 
+public slots:
+    void categoriesViewDialogShow();
+    void currenscysViewDialogShow();
+    void discountsViewDialogShow();
+    void menusViewDialogShow();
+    void restaurantsViewDialogShow();
+    void settingsViewDialogShow();
+    void streetViewDialogShow();
+
 private:
     Ui::MainWindow *ui;
 };
