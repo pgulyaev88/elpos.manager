@@ -1,3 +1,4 @@
+#include <QtGui>
 #include <QApplication>
 #include <QMessageBox>
 #include <QSettings>
@@ -18,37 +19,37 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->setupUi(this);
 }
 
-MainWindow::menusViewDialogShow(){
+void MainWindow::menusViewDialogShow(){
     menusViewDialog dialog(this);
-    dialog.exec;
+    dialog.exec();
 }
 
-MainWindow::categoriesViewDialogShow(){
+void MainWindow::categoriesViewDialogShow(){
     categoriesViewDialog dialog(this);
-    dialog.exec;
+    dialog.exec();
 }
 
-MainWindow::currenscysViewDialogShow(){
+void MainWindow::currenscysViewDialogShow(){
     currencysViewDialog dialog(this);
     dialog.exec();
 }
 
-MainWindow::discountsViewDialogShow(){
+void MainWindow::discountsViewDialogShow(){
     discountsViewDialog dialog(this);
-    dialog.exec;
+    dialog.exec();
 }
 
-MainWindow::restaurantsViewDialogShow(){
+void MainWindow::restaurantsViewDialogShow(){
     restaurantsViewDialog dialog(this);
-    dialog.exec;
+    dialog.exec();
 }
 
-MainWindow::streetViewDialogShow(){
+void MainWindow::streetViewDialogShow(){
     streetViewDialog dialog(this);
     dialog.exec();
 }
 
-MainWindow::settingsViewDialogShow(){
+void MainWindow::settingsViewDialogShow(){
     settingsDialog dialog(this);
     dialog.exec();
 }
