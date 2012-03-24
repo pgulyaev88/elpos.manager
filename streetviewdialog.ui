@@ -96,7 +96,7 @@
     <item>
      <widget class="QDialogButtonBox" name="streetButtonBox">
       <property name="standardButtons">
-       <set>QDialogButtonBox::Cancel|QDialogButtonBox::Ok</set>
+       <set>QDialogButtonBox::Close</set>
       </property>
       <property name="centerButtons">
        <bool>false</bool>

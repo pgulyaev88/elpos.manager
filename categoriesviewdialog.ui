@@ -13,7 +13,7 @@
   <property name="windowTitle">
    <string>Dialog</string>
   </property>
-  <widget class="QTreeWidget" name="categoryDeletePushButtonTreeWidget">
+  <widget class="QTableView" name="categoryTableView">
    <property name="geometry">
     <rect>
      <x>10</x>
@@ -25,16 +25,6 @@
    <property name="lineWidth">
     <number>2</number>
    </property>
-   <column>
-    <property name="text">
-     <string>menu_group</string>
-    </property>
-   </column>
-   <column>
-    <property name="text">
-     <string>menu_list</string>
-    </property>
-   </column>
   </widget>
   <widget class="QWidget" name="horizontalLayoutWidget">
    <property name="geometry">
@@ -119,7 +109,7 @@
     <item>
      <widget class="QDialogButtonBox" name="categoryButtonBox">
       <property name="standardButtons">
-       <set>QDialogButtonBox::Cancel|QDialogButtonBox::Ok</set>
+       <set>QDialogButtonBox::Close</set>
       </property>
       <property name="centerButtons">
        <bool>false</bool>
@@ -130,5 +120,22 @@
   </widget>
  </widget>
  <resources/>
- <connections/>
+ <connections>
+  <connection>
+   <sender>categoryButtonBox</sender>
+   <signal>rejected()</signal>
+   <receiver>categoriesViewDialog</receiver>
+   <slot>close()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>569</x>
+     <y>580</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>349</x>
+     <y>309</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
 </ui>

@@ -17,6 +17,9 @@ public:
 
 private:
     Ui::currencysViewDialog *ui;
+
+private slots:
+    void getCurencysList();
 };
 
 #endif // CURRENCYSVIEWDIALOG_H

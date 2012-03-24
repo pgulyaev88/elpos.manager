@@ -96,16 +96,16 @@
     <item>
      <widget class="QDialogButtonBox" name="restaurantsButtonBox">
       <property name="standardButtons">
-       <set>QDialogButtonBox::Cancel|QDialogButtonBox::Ok</set>
+       <set>QDialogButtonBox::Close</set>
       </property>
       <property name="centerButtons">
-       <bool>true</bool>
+       <bool>false</bool>
       </property>
      </widget>
     </item>
    </layout>
   </widget>
-  <widget class="QTableWidget" name="tableWidget">
+  <widget class="QTableView" name="restaurantsTableView">
    <property name="geometry">
     <rect>
      <x>10</x>
@@ -114,38 +114,25 @@
      <height>551</height>
     </rect>
    </property>
-   <column>
-    <property name="text">
-     <string>№</string>
-    </property>
-   </column>
-   <column>
-    <property name="text">
-     <string>RestName</string>
-    </property>
-   </column>
-   <column>
-    <property name="text">
-     <string>Address</string>
-    </property>
-   </column>
-   <column>
-    <property name="text">
-     <string>OpenTime</string>
-    </property>
-   </column>
-   <column>
-    <property name="text">
-     <string>CloseTime</string>
-    </property>
-   </column>
-   <column>
-    <property name="text">
-     <string>Reserve</string>
-    </property>
-   </column>
   </widget>
  </widget>
  <resources/>
- <connections/>
+ <connections>
+  <connection>
+   <sender>restaurantsButtonBox</sender>
+   <signal>rejected()</signal>
+   <receiver>restaurantsViewDialog</receiver>
+   <slot>close()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>569</x>
+     <y>590</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>349</x>
+     <y>309</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
 </ui>

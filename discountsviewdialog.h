@@ -17,6 +17,9 @@ public:
 
 private:
     Ui::discountsViewDialog *ui;
+
+private slots:
+    void getDiscountsList();
 };
 
 #endif // DISCOUNTSVIEWDIALOG_H

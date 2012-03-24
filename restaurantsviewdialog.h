@@ -15,6 +15,9 @@ public:
     explicit restaurantsViewDialog(QWidget *parent = 0);
     ~restaurantsViewDialog();
 
+protected slots:
+    void getRestaurantsList();
+
 private:
     Ui::restaurantsViewDialog *ui;
 };

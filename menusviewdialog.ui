@@ -96,16 +96,16 @@
     <item>
      <widget class="QDialogButtonBox" name="menusButtonBox">
       <property name="standardButtons">
-       <set>QDialogButtonBox::Cancel|QDialogButtonBox::Ok</set>
+       <set>QDialogButtonBox::Close</set>
       </property>
       <property name="centerButtons">
-       <bool>true</bool>
+       <bool>false</bool>
       </property>
      </widget>
     </item>
    </layout>
   </widget>
-  <widget class="QTreeWidget" name="treeWidget">
+  <widget class="QTableView" name="menusTableView">
    <property name="geometry">
     <rect>
      <x>10</x>
@@ -117,18 +117,25 @@
    <property name="lineWidth">
     <number>2</number>
    </property>
-   <column>
-    <property name="text">
-     <string>menu_group</string>
-    </property>
-   </column>
-   <column>
-    <property name="text">
-     <string>menu_list</string>
-    </property>
-   </column>
   </widget>
  </widget>
  <resources/>
- <connections/>
+ <connections>
+  <connection>
+   <sender>menusButtonBox</sender>
+   <signal>rejected()</signal>
+   <receiver>menusViewDialog</receiver>
+   <slot>close()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>569</x>
+     <y>580</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>349</x>
+     <y>309</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
 </ui>

@@ -17,6 +17,9 @@ public:
 
 private:
     Ui::categoriesViewDialog *ui;
+
+private slots:
+    void getCategoriesList();
 };
 
 #endif // CATEGORIESVIEWDIALOG_H

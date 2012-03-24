@@ -17,6 +17,9 @@ public:
 
 private:
     Ui::menusViewDialog *ui;
+
+private slots:
+    void getMenusList();
 };
 
 #endif // MENUSVIEWDIALOG_H
