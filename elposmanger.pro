@@ -23,7 +23,8 @@ SOURCES += main.cpp\
     discountschangedialog.cpp \
     menuschangedialog.cpp \
     restaurantschangedialog.cpp \
-    streetchangedialog.cpp
+    streetchangedialog.cpp \
+    settingsdialog.cpp
 
 HEADERS  += mainwindow.h \
     categoriesviewdialog.h \
@@ -37,7 +38,8 @@ HEADERS  += mainwindow.h \
     discountschangedialog.h \
     menuschangedialog.h \
     restaurantschangedialog.h \
-    streetchangedialog.h
+    streetchangedialog.h \
+    settingsdialog.h
 
 FORMS    += mainwindow.ui \
     categoriesviewdialog.ui \
@@ -51,7 +53,11 @@ FORMS    += mainwindow.ui \
     discountschangedialog.ui \
     menuschangedialog.ui \
     restaurantschangedialog.ui \
-    streetchangedialog.ui
+    streetchangedialog.ui \
+    settingsdialog.ui
+
+
+
 
 
 
