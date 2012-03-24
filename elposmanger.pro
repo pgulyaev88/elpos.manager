@@ -24,7 +24,8 @@ SOURCES += main.cpp\
     menuschangedialog.cpp \
     restaurantschangedialog.cpp \
     streetchangedialog.cpp \
-    settingsdialog.cpp
+    settingsdialog.cpp \
+    managercore.cpp
 
 HEADERS  += mainwindow.h \
     categoriesviewdialog.h \
@@ -39,7 +40,8 @@ HEADERS  += mainwindow.h \
     menuschangedialog.h \
     restaurantschangedialog.h \
     streetchangedialog.h \
-    settingsdialog.h
+    settingsdialog.h \
+    managercore.h
 
 FORMS    += mainwindow.ui \
     categoriesviewdialog.ui \
@@ -55,6 +57,8 @@ FORMS    += mainwindow.ui \
     restaurantschangedialog.ui \
     streetchangedialog.ui \
     settingsdialog.ui
+
+
 
 
 
