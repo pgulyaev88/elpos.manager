@@ -7,6 +7,7 @@
 #include <QTableView>
 #include <QDebug>
 #include "categoriesviewdialog.h"
+#include "categorieschangedialog.h"
 #include "ui_categoriesviewdialog.h"
 
 categoriesViewDialog::categoriesViewDialog(QWidget *parent) :
@@ -26,6 +27,21 @@ void categoriesViewDialog::getCategoriesList(){
     if(getCategories->lastError().isValid())
         qDebug() << getCategories->lastError();
     ui->categoryTableView->setModel(getCategories);
+}
+
+void categoriesViewDialog::categoryAdd(){
+    categoriesChangeDialog dialog(this);
+    dialog.exec();
+}
+
+void categoriesViewDialog::categoryModify(){
+    categoriesChangeDialog dialog(this);
+    dialog.exec();
+}
+
+void categoriesViewDialog::categoryDelete(){
+    categoriesChangeDialog dialog(this);
+    dialog.exec();
 }
 
 categoriesViewDialog::~categoriesViewDialog()

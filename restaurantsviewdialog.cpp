@@ -6,6 +6,7 @@
 #include <QSqlError>
 #include <QTableView>
 #include <QDebug>
+#include "restaurantschangedialog.h"
 #include "restaurantsviewdialog.h"
 #include "ui_restaurantsviewdialog.h"
 
@@ -28,6 +29,21 @@ void restaurantsViewDialog::getRestaurantsList(){
 
     ui->restaurantsTableView->setModel(getRestaurants);
 
+}
+
+void restaurantsViewDialog::restaurantsAdd(){
+    restaurantsChangeDialog dialog(this);
+    dialog.exec();
+}
+
+void restaurantsViewDialog::restaurantsModify(){
+    restaurantsChangeDialog dialog(this);
+    dialog.exec();
+}
+
+void restaurantsViewDialog::restaurantsDelete(){
+    restaurantsChangeDialog dialog(this);
+    dialog.exec();
 }
 
 restaurantsViewDialog::~restaurantsViewDialog()

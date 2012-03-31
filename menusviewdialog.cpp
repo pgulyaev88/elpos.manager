@@ -6,6 +6,7 @@
 #include <QSqlError>
 #include <QTableView>
 #include <QDebug>
+#include "menuschangedialog.h"
 #include "menusviewdialog.h"
 #include "ui_menusviewdialog.h"
 
@@ -26,6 +27,21 @@ void menusViewDialog::getMenusList(){
         qDebug() << getMenus->lastError();
 
     ui->menusTableView->setModel(getMenus);
+}
+
+void menusViewDialog::menusAdd(){
+    menusChangeDialog dialog(this);
+    dialog.exec();
+}
+
+void menusViewDialog::menusModify(){
+    menusChangeDialog dialog(this);
+    dialog.exec();
+}
+
+void menusViewDialog::menusDelete(){
+    menusChangeDialog dialog(this);
+    dialog.exec();
 }
 
 menusViewDialog::~menusViewDialog()

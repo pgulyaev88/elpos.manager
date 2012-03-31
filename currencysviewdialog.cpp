@@ -7,6 +7,7 @@
 #include <QTableView>
 #include <QDebug>
 #include "currencysviewdialog.h"
+#include "currencyschangedialog.h"
 #include "ui_currencysviewdialog.h"
 
 currencysViewDialog::currencysViewDialog(QWidget *parent) :
@@ -14,19 +15,34 @@ currencysViewDialog::currencysViewDialog(QWidget *parent) :
     ui(new Ui::currencysViewDialog)
 {
     ui->setupUi(this);
-    getCurencysList();
+    getCurrenciesList();
 }
 
-void currencysViewDialog::getCurencysList(){
+void currencysViewDialog::getCurrenciesList(){
 
     QSqlDatabase::database();
 
-    QSqlQueryModel *getCurencys = new QSqlQueryModel;
-    getCurencys->setQuery("SELECT * FROM currencys");
-    if(getCurencys->lastError().isValid())
-        qDebug() << getCurencys->lastError();
+    QSqlQueryModel *getCurrencies = new QSqlQueryModel;
+    getCurrencies->setQuery("SELECT * FROM currencys");
+    if(getCurrencies->lastError().isValid())
+        qDebug() << getCurrencies->lastError();
 
-    ui->currencysTableView->setModel(getCurencys);
+    ui->currencysTableView->setModel(getCurrencies);
+}
+
+void currencysViewDialog::currensiesAdd(){
+    currencysChangeDialog dialog(this);
+    dialog.exec();
+}
+
+void currencysViewDialog::currensiesModify(){
+    currencysChangeDialog dialog(this);
+    dialog.exec();
+}
+
+void currencysViewDialog::currensiesDelete(){
+    currencysChangeDialog dialog(this);
+    dialog.exec();
 }
 
 currencysViewDialog::~currencysViewDialog()

@@ -137,5 +137,58 @@
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>categoryAddPushButton</sender>
+   <signal>clicked(bool)</signal>
+   <receiver>categoriesViewDialog</receiver>
+   <slot>categoryAdd()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>45</x>
+     <y>580</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>349</x>
+     <y>309</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>categoryModifyPushButton</sender>
+   <signal>clicked(bool)</signal>
+   <receiver>categoriesViewDialog</receiver>
+   <slot>categoryModify()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>119</x>
+     <y>580</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>349</x>
+     <y>309</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>categoryDeletePushButton</sender>
+   <signal>clicked(bool)</signal>
+   <receiver>categoriesViewDialog</receiver>
+   <slot>categoryDelete()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>193</x>
+     <y>580</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>349</x>
+     <y>309</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
+ <slots>
+  <slot>categoryAdd()</slot>
+  <slot>categoryModify()</slot>
+  <slot>categoryDelete()</slot>
+ </slots>
 </ui>

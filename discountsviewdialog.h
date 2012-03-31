@@ -20,6 +20,9 @@ private:
 
 private slots:
     void getDiscountsList();
+    void discountsAdd();
+    void discountsModify();
+    void discountsDelete();
 };
 
 #endif // DISCOUNTSVIEWDIALOG_H

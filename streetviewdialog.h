@@ -17,6 +17,9 @@ public:
 
 private slots:
     void getStreetList();
+    void streetsAdd();
+    void streetsModiify();
+    void streetsDelete();
 
 private:
     Ui::streetViewDialog *ui;

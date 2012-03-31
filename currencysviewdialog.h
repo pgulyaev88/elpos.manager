@@ -19,7 +19,10 @@ private:
     Ui::currencysViewDialog *ui;
 
 private slots:
-    void getCurencysList();
+    void getCurrenciesList();
+    void currensiesAdd();
+    void currensiesModify();
+    void currensiesDelete();
 };
 
 #endif // CURRENCYSVIEWDIALOG_H

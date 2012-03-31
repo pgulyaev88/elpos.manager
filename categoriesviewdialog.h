@@ -18,8 +18,14 @@ public:
 private:
     Ui::categoriesViewDialog *ui;
 
+public slots:
+
 private slots:
     void getCategoriesList();
+    void categoryAdd();
+    void categoryModify();
+    void categoryDelete();
+
 };
 
 #endif // CATEGORIESVIEWDIALOG_H

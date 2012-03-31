@@ -20,6 +20,9 @@ private:
 
 private slots:
     void getMenusList();
+    void menusAdd();
+    void menusModify();
+    void menusDelete();
 };
 
 #endif // MENUSVIEWDIALOG_H

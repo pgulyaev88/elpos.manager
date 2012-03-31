@@ -17,6 +17,9 @@ public:
 
 protected slots:
     void getRestaurantsList();
+    void restaurantsAdd();
+    void restaurantsModify();
+    void restaurantsDelete();
 
 private:
     Ui::restaurantsViewDialog *ui;

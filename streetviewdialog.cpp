@@ -6,6 +6,7 @@
 #include <QSqlError>
 #include <QTableView>
 #include <QDebug>
+#include "streetchangedialog.h"
 #include "streetviewdialog.h"
 #include "ui_streetviewdialog.h"
 
@@ -28,6 +29,21 @@ void streetViewDialog::getStreetList(){
 
     ui->streetTableView->setModel(getStreet);
 
+}
+
+void streetViewDialog::streetsAdd(){
+    streetChangeDialog dialog(this);
+    dialog.exec();
+}
+
+void streetViewDialog::streetsModiify(){
+    streetChangeDialog dialog(this);
+    dialog.exec();
+}
+
+void streetViewDialog::streetsDelete(){
+    streetChangeDialog dialog(this);
+    dialog.exec();
 }
 
 streetViewDialog::~streetViewDialog()

@@ -7,6 +7,7 @@
 #include <QTableView>
 #include <QDebug>
 #include "discountsviewdialog.h"
+#include "discountschangedialog.h"
 #include "ui_discountsviewdialog.h"
 
 discountsViewDialog::discountsViewDialog(QWidget *parent) :
@@ -26,6 +27,21 @@ void discountsViewDialog::getDiscountsList(){
         qDebug() << getDiscounts->lastError();
 
     ui->discountsTableView->setModel(getDiscounts);
+}
+
+void discountsViewDialog::discountsAdd(){
+    discountsChangeDialog dialog(this);
+    dialog.exec();
+}
+
+void discountsViewDialog::discountsModify(){
+    discountsChangeDialog dialog(this);
+    dialog.exec();
+}
+
+void discountsViewDialog::discountsDelete(){
+    discountsChangeDialog dialog(this);
+    dialog.exec();
 }
 
 discountsViewDialog::~discountsViewDialog()
