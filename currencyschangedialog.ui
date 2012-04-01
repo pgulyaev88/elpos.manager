@@ -24,54 +24,81 @@
    </property>
    <layout class="QGridLayout" name="gridLayout">
     <item row="0" column="1">
-     <widget class="QLineEdit" name="currencysLineEdit"/>
+     <widget class="QLineEdit" name="currenciesNameLineEdit"/>
     </item>
     <item row="1" column="1">
-     <widget class="QLineEdit" name="currencysAltName"/>
+     <widget class="QLineEdit" name="currenciesAltName">
+      <property name="inputMask">
+       <string>AAA; </string>
+      </property>
+      <property name="cursorPosition">
+       <number>3</number>
+      </property>
+     </widget>
     </item>
     <item row="0" column="0">
-     <widget class="QLabel" name="label">
+     <widget class="QLabel" name="currenciesNameLabel">
       <property name="text">
        <string>CyrrensyName</string>
       </property>
      </widget>
     </item>
     <item row="1" column="0">
-     <widget class="QLabel" name="label_2">
+     <widget class="QLabel" name="currenciesAltLabel">
       <property name="text">
        <string>CyrrensyAltName</string>
       </property>
      </widget>
     </item>
     <item row="2" column="1">
-     <widget class="QLineEdit" name="currencysRateLineEdit"/>
+     <widget class="QLineEdit" name="currenciesRateLineEdit">
+      <property name="inputMethodHints">
+       <set>Qt::ImhNone</set>
+      </property>
+      <property name="inputMask">
+       <string>9 999 999 999.00;_</string>
+      </property>
+      <property name="cursorPosition">
+       <number>16</number>
+      </property>
+     </widget>
     </item>
     <item row="2" column="0">
-     <widget class="QLabel" name="label_3">
+     <widget class="QLabel" name="currenciesRateLabel">
       <property name="text">
        <string>CurrensyRate</string>
       </property>
      </widget>
     </item>
     <item row="4" column="0">
-     <widget class="QLabel" name="label_4">
+     <widget class="QLabel" name="currenciesNationalCurrensyLabel">
       <property name="text">
        <string>NationalCurrensy</string>
       </property>
      </widget>
     </item>
     <item row="4" column="1">
-     <widget class="QCheckBox" name="currencysCheckBox">
+     <widget class="QCheckBox" name="currenciesNationalCurrensyCheckBox">
       <property name="text">
        <string>National</string>
       </property>
      </widget>
     </item>
     <item row="3" column="1">
-     <widget class="QLineEdit" name="currencysCodeLineEdit"/>
+     <widget class="QLineEdit" name="currenciesCodeLineEdit">
+      <property name="inputMethodHints">
+       <set>Qt::ImhDigitsOnly</set>
+      </property>
+      <property name="inputMask">
+       <string>999999; </string>
+      </property>
+      <property name="cursorPosition">
+       <number>6</number>
+      </property>
+     </widget>
     </item>
     <item row="3" column="0">
-     <widget class="QLabel" name="label_5">
+     <widget class="QLabel" name="currenciesCodeLabel">
       <property name="text">
        <string>Code</string>
       </property>
@@ -79,7 +106,7 @@
     </item>
    </layout>
   </widget>
-  <widget class="QDialogButtonBox" name="currencysButtonBox">
+  <widget class="QDialogButtonBox" name="currenciesButtonBox">
    <property name="geometry">
     <rect>
      <x>140</x>
@@ -93,11 +120,19 @@
    </property>
   </widget>
  </widget>
+ <tabstops>
+  <tabstop>currenciesNameLineEdit</tabstop>
+  <tabstop>currenciesAltName</tabstop>
+  <tabstop>currenciesRateLineEdit</tabstop>
+  <tabstop>currenciesCodeLineEdit</tabstop>
+  <tabstop>currenciesNationalCurrensyCheckBox</tabstop>
+  <tabstop>currenciesButtonBox</tabstop>
+ </tabstops>
  <resources/>
  <connections>
   <connection>
-   <sender>currencysButtonBox</sender>
-   <signal>helpRequested()</signal>
+   <sender>currenciesButtonBox</sender>
+   <signal>rejected()</signal>
    <receiver>currencysChangeDialog</receiver>
    <slot>close()</slot>
    <hints>
@@ -111,5 +146,24 @@
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>currenciesButtonBox</sender>
+   <signal>accepted()</signal>
+   <receiver>currencysChangeDialog</receiver>
+   <slot>currensiesNew()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>219</x>
+     <y>232</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>154</x>
+     <y>130</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
+ <slots>
+  <slot>currensiesNew()</slot>
+ </slots>
 </ui>

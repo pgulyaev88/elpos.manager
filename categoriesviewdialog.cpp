@@ -23,7 +23,7 @@ void categoriesViewDialog::getCategoriesList(){
     QSqlDatabase::database();
 
     QSqlQueryModel *getCategories = new QSqlQueryModel;
-    getCategories->setQuery("SELECT * FROM categories");
+    getCategories->setQuery("SELECT * FROM categories WHERE deleted='false'");
     if(getCategories->lastError().isValid())
         qDebug() << getCategories->lastError();
     ui->categoryTableView->setModel(getCategories);
@@ -32,6 +32,8 @@ void categoriesViewDialog::getCategoriesList(){
 void categoriesViewDialog::categoryAdd(){
     categoriesChangeDialog dialog(this);
     dialog.exec();
+    if(dialog.close())
+    getCategoriesList();
 }
 
 void categoriesViewDialog::categoryModify(){

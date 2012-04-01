@@ -137,5 +137,58 @@
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>discountsAddPushButton</sender>
+   <signal>clicked(bool)</signal>
+   <receiver>discountsViewDialog</receiver>
+   <slot>discountsAdd()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>45</x>
+     <y>590</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>349</x>
+     <y>309</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>discountsModifyPushButton</sender>
+   <signal>clicked(bool)</signal>
+   <receiver>discountsViewDialog</receiver>
+   <slot>discountsModify()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>119</x>
+     <y>590</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>349</x>
+     <y>309</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>discountsDeletePushButton</sender>
+   <signal>clicked(bool)</signal>
+   <receiver>discountsViewDialog</receiver>
+   <slot>discountsDelete()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>193</x>
+     <y>590</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>349</x>
+     <y>309</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
+ <slots>
+  <slot>discountsAdd()</slot>
+  <slot>discountsModify()</slot>
+  <slot>discountsDelete()</slot>
+ </slots>
 </ui>

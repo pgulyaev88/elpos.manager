@@ -1,5 +1,14 @@
+#include <QApplication>
+#include <QMessageBox>
+#include <QSettings>
+#include <QSqlDatabase>
 #include <QSqlQuery>
-#include <QSqlQueryModel>
+#include <QSqlError>
+#include <QTableView>
+#include <QDebug>
+#include <QLineEdit>
+#include <QDialogButtonBox>
+#include <QDialog>
 #include "streetchangedialog.h"
 #include "ui_streetchangedialog.h"
 

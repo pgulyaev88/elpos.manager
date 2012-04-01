@@ -146,5 +146,58 @@
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>streetAddPushButton</sender>
+   <signal>clicked(bool)</signal>
+   <receiver>streetViewDialog</receiver>
+   <slot>streetsAdd()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>45</x>
+     <y>590</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>349</x>
+     <y>309</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>streetModifyPushButton</sender>
+   <signal>clicked(bool)</signal>
+   <receiver>streetViewDialog</receiver>
+   <slot>streetsModify()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>119</x>
+     <y>590</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>349</x>
+     <y>309</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>streetDeletePushButton</sender>
+   <signal>clicked(bool)</signal>
+   <receiver>streetViewDialog</receiver>
+   <slot>streetsDelete()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>193</x>
+     <y>590</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>349</x>
+     <y>309</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
+ <slots>
+  <slot>streetsAdd()</slot>
+  <slot>streetsModify()</slot>
+  <slot>streetsDelete()</slot>
+ </slots>
 </ui>

@@ -23,16 +23,18 @@ void currencysViewDialog::getCurrenciesList(){
     QSqlDatabase::database();
 
     QSqlQueryModel *getCurrencies = new QSqlQueryModel;
-    getCurrencies->setQuery("SELECT * FROM currencys");
+    getCurrencies->setQuery("SELECT * FROM currencies WHERE deleted='false'");
     if(getCurrencies->lastError().isValid())
         qDebug() << getCurrencies->lastError();
 
-    ui->currencysTableView->setModel(getCurrencies);
+    ui->currenciesTableView->setModel(getCurrencies);
 }
 
 void currencysViewDialog::currensiesAdd(){
     currencysChangeDialog dialog(this);
     dialog.exec();
+    if(dialog.close())
+        getCurrenciesList();
 }
 
 void currencysViewDialog::currensiesModify(){

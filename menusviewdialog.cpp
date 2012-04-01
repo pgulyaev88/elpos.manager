@@ -22,7 +22,7 @@ void menusViewDialog::getMenusList(){
     QSqlDatabase::database();
 
     QSqlQueryModel *getMenus = new QSqlQueryModel;
-    getMenus->setQuery("SELECT * FROM menus");
+    getMenus->setQuery("SELECT * FROM menus WHERE deleted='false'");
     if(getMenus->lastError().isValid())
         qDebug() << getMenus->lastError();
 
@@ -32,6 +32,8 @@ void menusViewDialog::getMenusList(){
 void menusViewDialog::menusAdd(){
     menusChangeDialog dialog(this);
     dialog.exec();
+    if(dialog.close())
+        getMenusList();
 }
 
 void menusViewDialog::menusModify(){

@@ -2,10 +2,14 @@
 #define CATEGORIESCHANGEDIALOG_H
 
 #include <QDialog>
-
+#include <QDebug>
+#include <QLineEdit>
 namespace Ui {
     class categoriesChangeDialog;
 }
+
+class QLineEdit;
+
 
 class categoriesChangeDialog : public QDialog
 {
@@ -17,6 +21,15 @@ public:
 
 private:
     Ui::categoriesChangeDialog *ui;
+    int categoriesCode;
+    QString categoriesName;
+    QString categoriesAltName;
+//    QString query;
+
+
+private slots:
+    void categoryNew();
+    void categoryMod();
 };
 
 #endif // CATEGORIESCHANGEDIALOG_H

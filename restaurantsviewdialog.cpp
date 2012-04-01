@@ -23,7 +23,7 @@ void restaurantsViewDialog::getRestaurantsList(){
     QSqlDatabase::database();
 
     QSqlQueryModel *getRestaurants = new QSqlQueryModel;
-    getRestaurants->setQuery("SELECT * FROM restaurants");
+    getRestaurants->setQuery("SELECT * FROM restaurants WHERE deleted='false'");
     if(getRestaurants->lastError().isValid())
         qDebug() << getRestaurants->lastError();
 
@@ -34,6 +34,8 @@ void restaurantsViewDialog::getRestaurantsList(){
 void restaurantsViewDialog::restaurantsAdd(){
     restaurantsChangeDialog dialog(this);
     dialog.exec();
+    if(dialog.close())
+        getRestaurantsList();
 }
 
 void restaurantsViewDialog::restaurantsModify(){

@@ -137,5 +137,58 @@
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>menusAddPushbutton</sender>
+   <signal>clicked(bool)</signal>
+   <receiver>menusViewDialog</receiver>
+   <slot>menusAdd()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>45</x>
+     <y>580</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>349</x>
+     <y>309</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>menusModifyPushButton</sender>
+   <signal>clicked(bool)</signal>
+   <receiver>menusViewDialog</receiver>
+   <slot>menusModify()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>119</x>
+     <y>580</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>349</x>
+     <y>309</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>menusDeletePushButton</sender>
+   <signal>clicked(bool)</signal>
+   <receiver>menusViewDialog</receiver>
+   <slot>menusDelete()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>193</x>
+     <y>580</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>349</x>
+     <y>309</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
+ <slots>
+  <slot>menusAdd()</slot>
+  <slot>menusModify()</slot>
+  <slot>menusDelete()</slot>
+ </slots>
 </ui>

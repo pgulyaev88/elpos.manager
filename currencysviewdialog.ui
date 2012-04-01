@@ -13,7 +13,7 @@
   <property name="windowTitle">
    <string>Dialog</string>
   </property>
-  <widget class="QTableView" name="currencysTableView">
+  <widget class="QTableView" name="currenciesTableView">
    <property name="geometry">
     <rect>
      <x>10</x>
@@ -37,7 +37,7 @@
    </property>
    <layout class="QHBoxLayout" name="horizontalLayout">
     <item>
-     <widget class="QPushButton" name="currencysAddPushButton">
+     <widget class="QPushButton" name="currenciesAddPushButton">
       <property name="minimumSize">
        <size>
         <width>70</width>
@@ -56,7 +56,7 @@
      </widget>
     </item>
     <item>
-     <widget class="QPushButton" name="currencysModifyPushButton">
+     <widget class="QPushButton" name="currenciesModifyPushButton">
       <property name="minimumSize">
        <size>
         <width>70</width>
@@ -75,7 +75,7 @@
      </widget>
     </item>
     <item>
-     <widget class="QPushButton" name="currencysDeletePushButton">
+     <widget class="QPushButton" name="currenciesDeletePushButton">
       <property name="minimumSize">
        <size>
         <width>70</width>
@@ -107,7 +107,7 @@
      </spacer>
     </item>
     <item>
-     <widget class="QDialogButtonBox" name="currencysButtonBox">
+     <widget class="QDialogButtonBox" name="currenciesButtonBox">
       <property name="standardButtons">
        <set>QDialogButtonBox::Close</set>
       </property>
@@ -122,7 +122,7 @@
  <resources/>
  <connections>
   <connection>
-   <sender>currencysButtonBox</sender>
+   <sender>currenciesButtonBox</sender>
    <signal>rejected()</signal>
    <receiver>currencysViewDialog</receiver>
    <slot>close()</slot>
@@ -137,5 +137,58 @@
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>currenciesAddPushButton</sender>
+   <signal>clicked(bool)</signal>
+   <receiver>currencysViewDialog</receiver>
+   <slot>currensiesAdd()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>45</x>
+     <y>580</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>349</x>
+     <y>309</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>currenciesModifyPushButton</sender>
+   <signal>clicked(bool)</signal>
+   <receiver>currencysViewDialog</receiver>
+   <slot>currensiesModify()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>119</x>
+     <y>580</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>349</x>
+     <y>309</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>currenciesDeletePushButton</sender>
+   <signal>clicked(bool)</signal>
+   <receiver>currencysViewDialog</receiver>
+   <slot>currensiesDelete()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>193</x>
+     <y>580</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>349</x>
+     <y>309</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
+ <slots>
+  <slot>currensiesAdd()</slot>
+  <slot>currensiesModify()</slot>
+  <slot>currensiesDelete()</slot>
+ </slots>
 </ui>

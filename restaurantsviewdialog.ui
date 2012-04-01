@@ -134,5 +134,58 @@
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>restaurantsAddPushButton</sender>
+   <signal>clicked(bool)</signal>
+   <receiver>restaurantsViewDialog</receiver>
+   <slot>restaurantsAdd()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>45</x>
+     <y>590</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>349</x>
+     <y>309</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>restaurantsModifyPushButton</sender>
+   <signal>clicked(bool)</signal>
+   <receiver>restaurantsViewDialog</receiver>
+   <slot>restaurantsModify()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>119</x>
+     <y>590</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>349</x>
+     <y>309</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>restaurantsDeletePushButton</sender>
+   <signal>clicked(bool)</signal>
+   <receiver>restaurantsViewDialog</receiver>
+   <slot>restaurantsDelete()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>193</x>
+     <y>590</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>349</x>
+     <y>309</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
+ <slots>
+  <slot>restaurantsAdd()</slot>
+  <slot>restaurantsModify()</slot>
+  <slot>restaurantsDelete()</slot>
+ </slots>
 </ui>

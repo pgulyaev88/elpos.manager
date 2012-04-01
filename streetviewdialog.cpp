@@ -23,7 +23,7 @@ void streetViewDialog::getStreetList(){
     QSqlDatabase::database();
 
     QSqlQueryModel *getStreet = new QSqlQueryModel;
-    getStreet->setQuery("SELECT * FROM street");
+    getStreet->setQuery("SELECT * FROM street WHERE deleted='false'");
     if(getStreet->lastError().isValid())
         qDebug() << getStreet->lastError();
 
@@ -34,6 +34,8 @@ void streetViewDialog::getStreetList(){
 void streetViewDialog::streetsAdd(){
     streetChangeDialog dialog(this);
     dialog.exec();
+    if(dialog.close())
+        getStreetList();
 }
 
 void streetViewDialog::streetsModiify(){

@@ -22,7 +22,7 @@ void discountsViewDialog::getDiscountsList(){
     QSqlDatabase::database();
 
     QSqlQueryModel *getDiscounts = new QSqlQueryModel;
-    getDiscounts->setQuery("SELECT * FROM discunts");
+    getDiscounts->setQuery("SELECT * FROM discunts WHERE deleted='false'");
     if(getDiscounts->lastError().isValid())
         qDebug() << getDiscounts->lastError();
 
@@ -32,6 +32,8 @@ void discountsViewDialog::getDiscountsList(){
 void discountsViewDialog::discountsAdd(){
     discountsChangeDialog dialog(this);
     dialog.exec();
+    if(dialog.close())
+        getDiscountsList();
 }
 
 void discountsViewDialog::discountsModify(){
