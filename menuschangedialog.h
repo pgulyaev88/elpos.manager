@@ -2,6 +2,8 @@
 #define MENUSCHANGEDIALOG_H
 
 #include <QDialog>
+#include <QDebug>
+#include <QLineEdit>
 
 namespace Ui {
     class menusChangeDialog;
@@ -17,6 +19,13 @@ public:
 
 private:
     Ui::menusChangeDialog *ui;
+    QString menuName;
+    QString menuAltName;
+    float menuPrice;
+
+private slots:
+    void menusAdd();
+    void menusMod();
 };
 
 #endif // MENUSCHANGEDIALOG_H

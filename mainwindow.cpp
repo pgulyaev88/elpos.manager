@@ -28,7 +28,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
 void MainWindow::loadDatabaseConnection(){
     QSqlDatabase db = QSqlDatabase::addDatabase("QPSQL");
-    db.setHostName("127.0.0.1");
+    db.setHostName("192.168.1.33");
     db.setDatabaseName("elpos");
     db.setUserName("elpos");
     db.setPassword("elpos");

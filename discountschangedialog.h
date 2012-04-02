@@ -2,6 +2,8 @@
 #define DISCOUNTSCHANGEDIALOG_H
 
 #include <QDialog>
+#include <QDebug>
+#include <QLineEdit>
 
 namespace Ui {
     class discountsChangeDialog;
@@ -17,6 +19,12 @@ public:
 
 private:
     Ui::discountsChangeDialog *ui;
+    QString discountName;
+    float discountPercent;
+
+private slots:
+    void discountNew();
+    void discountMod();
 };
 
 #endif // DISCOUNTSCHANGEDIALOG_H
