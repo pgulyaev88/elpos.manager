@@ -22,7 +22,7 @@ void discountsViewDialog::getDiscountsList(){
     QSqlDatabase::database();
 
     QSqlQueryModel *getDiscounts = new QSqlQueryModel;
-    getDiscounts->setQuery("SELECT * FROM discunts WHERE deleted='false'");
+    getDiscounts->setQuery("SELECT * FROM discounts WHERE deleted='false'");
     if(getDiscounts->lastError().isValid())
         qDebug() << getDiscounts->lastError();
 

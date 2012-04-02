@@ -22,10 +22,13 @@ private:
     QString menuName;
     QString menuAltName;
     float menuPrice;
+    QString categoryName;
+    int categoryID;
 
 private slots:
     void menusAdd();
     void menusMod();
+    void getCategoryFromMenu();
 };
 
 #endif // MENUSCHANGEDIALOG_H

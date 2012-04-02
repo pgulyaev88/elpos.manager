@@ -39,6 +39,7 @@
     <addaction name="actionRestaurants"/>
     <addaction name="separator"/>
     <addaction name="actionStreet"/>
+    <addaction name="actionDiscounts"/>
    </widget>
    <widget class="QMenu" name="menuOptions">
     <property name="title">
@@ -119,6 +120,11 @@
   <action name="actionStreet">
    <property name="text">
     <string>Street</string>
+   </property>
+  </action>
+  <action name="actionDiscounts">
+   <property name="text">
+    <string>Discounts</string>
    </property>
   </action>
  </widget>
@@ -226,6 +232,22 @@
    <signal>triggered(bool)</signal>
    <receiver>MainWindow</receiver>
    <slot>streetViewDialogShow()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>199</x>
+     <y>149</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>actionDiscounts</sender>
+   <signal>triggered(bool)</signal>
+   <receiver>MainWindow</receiver>
+   <slot>discountsViewDialogShow()</slot>
    <hints>
     <hint type="sourcelabel">
      <x>-1</x>
