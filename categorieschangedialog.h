@@ -18,18 +18,25 @@ class categoriesChangeDialog : public QDialog
 public:
     explicit categoriesChangeDialog(QWidget *parent = 0);
     ~categoriesChangeDialog();
+//    int categoryID;
+
 
 private:
     Ui::categoriesChangeDialog *ui;
     int categoriesCode;
     QString categoriesName;
     QString categoriesAltName;
+//    int categoryID;
+//    QString name;
+//    QString altName;
+//    int code;
 //    QString query;
 
 
 private slots:
     void categoryNew();
-    void categoryMod();
+    void categoryMod(int categoryID, QString name, QString altname, int code);
+//    void categoryMod(int ID);
 };
 
 #endif // CATEGORIESCHANGEDIALOG_H

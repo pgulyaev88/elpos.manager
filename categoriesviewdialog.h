@@ -15,8 +15,13 @@ public:
     explicit categoriesViewDialog(QWidget *parent = 0);
     ~categoriesViewDialog();
 
+
 private:
     Ui::categoriesViewDialog *ui;
+    int *categoryID;
+    QString *name;
+    QString *altName;
+    int *code;
 
 public slots:
 

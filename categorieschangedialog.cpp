@@ -9,6 +9,10 @@
 #include <QLineEdit>
 #include <QDialogButtonBox>
 #include <QDialog>
+#include <QModelIndex>
+#include <QSqlRelationalTableModel>
+#include <QSqlQueryModel>
+#include <QSqlError>
 #include "categorieschangedialog.h"
 #include "ui_categorieschangedialog.h"
 
@@ -31,19 +35,27 @@ void categoriesChangeDialog::categoryNew(){
     QSqlDatabase::database();
     QSqlQuery *queryCategoryAdd = new QSqlQuery;
 
-    queryCategoryAdd->prepare("INSERT INTO categories (category_id,name,alt_name,code,deleted)  VALUES(nextval('categories_category_id_seq'::regclass), :categoriesName, :categoriesAltName, :categoriesCode, false)");
+    queryCategoryAdd->prepare("INSERT INTO categories (category_id,name,altName,code,deleted)  VALUES(nextval('categories_category_id_seq'::regclass), :categoriesName, :categoriesAltName, :categoriesCode, false)");
     queryCategoryAdd->bindValue(":categoriesName", categoriesName);
     queryCategoryAdd->bindValue(":categoriesAltName",categoriesAltName);
     queryCategoryAdd->bindValue(":categoriesCode",categoriesCode);
     queryCategoryAdd->exec();
 //    if(queryCategoryAdd->lastError().isValid()) //временный камент для отладки, потом вернуть назад.
-        qDebug() << queryCategoryAdd->lastError();
+    qDebug() << queryCategoryAdd->lastError();
+    qDebug() << trUtf8("Запрос:") << queryCategoryAdd->executedQuery();
 
     categoriesChangeDialog::close();
 
 }
 
-void categoriesChangeDialog::categoryMod(){
+double categoriesChangeDialog::categoryMod(int categoryID, QString name, QString altname, int code){
+     ui->categoriesNameLineEdit->setText(name);
+     ui->categoriesAltNameLineEdit->setText(altname);
+     ui->categoriesCodeLineEdit->setText(QString::number(code));
+     categoriesChangeDialog dialog(this);
+     dialog.exec();
+
+
 
 }
 
