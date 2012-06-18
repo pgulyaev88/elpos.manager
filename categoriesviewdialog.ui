@@ -25,6 +25,9 @@
    <property name="lineWidth">
     <number>2</number>
    </property>
+   <property name="editTriggers">
+    <set>QAbstractItemView::DoubleClicked</set>
+   </property>
    <property name="selectionMode">
     <enum>QAbstractItemView::SingleSelection</enum>
    </property>

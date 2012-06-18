@@ -78,14 +78,46 @@
   <widget class="QDialogButtonBox" name="categoriesButtonBox">
    <property name="geometry">
     <rect>
-     <x>60</x>
+     <x>10</x>
      <y>110</y>
-     <width>261</width>
+     <width>311</width>
      <height>26</height>
     </rect>
    </property>
    <property name="standardButtons">
-    <set>QDialogButtonBox::Cancel|QDialogButtonBox::Ok|QDialogButtonBox::Save</set>
+    <set>QDialogButtonBox::Cancel|QDialogButtonBox::Ok</set>
+   </property>
+   <property name="centerButtons">
+    <bool>true</bool>
+   </property>
+  </widget>
+  <widget class="QLineEdit" name="categoriesIdLineEdit">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="geometry">
+    <rect>
+     <x>27</x>
+     <y>110</y>
+     <width>51</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="readOnly">
+    <bool>true</bool>
+   </property>
+  </widget>
+  <widget class="QLabel" name="categoriesIdLabel">
+   <property name="geometry">
+    <rect>
+     <x>11</x>
+     <y>110</y>
+     <width>16</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>ID:</string>
    </property>
   </widget>
  </widget>
@@ -107,24 +139,9 @@
     </hint>
    </hints>
   </connection>
-  <connection>
-   <sender>categoriesButtonBox</sender>
-   <signal>accepted()</signal>
-   <receiver>categoriesChangeDialog</receiver>
-   <slot>categoryNew()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>189</x>
-     <y>112</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>164</x>
-     <y>68</y>
-    </hint>
-   </hints>
-  </connection>
  </connections>
  <slots>
   <slot>categoryNew()</slot>
+  <slot>categoryUpdate()</slot>
  </slots>
 </ui>

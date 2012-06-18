@@ -7,11 +7,17 @@
     <x>0</x>
     <y>0</y>
     <width>309</width>
-    <height>262</height>
+    <height>172</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Dialog</string>
+  </property>
+  <property name="layoutDirection">
+   <enum>Qt::LeftToRight</enum>
+  </property>
+  <property name="sizeGripEnabled">
+   <bool>true</bool>
   </property>
   <widget class="QWidget" name="gridLayoutWidget">
    <property name="geometry">
@@ -19,7 +25,7 @@
      <x>10</x>
      <y>10</y>
      <width>291</width>
-     <height>201</height>
+     <height>131</height>
     </rect>
    </property>
    <layout class="QGridLayout" name="gridLayout">
@@ -52,14 +58,38 @@
     </item>
     <item row="2" column="1">
      <widget class="QLineEdit" name="currenciesRateLineEdit">
+      <property name="layoutDirection">
+       <enum>Qt::LeftToRight</enum>
+      </property>
+      <property name="autoFillBackground">
+       <bool>false</bool>
+      </property>
       <property name="inputMethodHints">
        <set>Qt::ImhNone</set>
       </property>
       <property name="inputMask">
-       <string>9 999 999 999.00;_</string>
+       <string>99999999.99; </string>
+      </property>
+      <property name="text">
+       <string>.</string>
+      </property>
+      <property name="maxLength">
+       <number>11</number>
+      </property>
+      <property name="frame">
+       <bool>true</bool>
+      </property>
+      <property name="echoMode">
+       <enum>QLineEdit::Normal</enum>
       </property>
       <property name="cursorPosition">
-       <number>16</number>
+       <number>0</number>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignBottom|Qt::AlignLeading|Qt::AlignLeft</set>
+      </property>
+      <property name="dragEnabled">
+       <bool>false</bool>
       </property>
      </widget>
     </item>
@@ -81,6 +111,9 @@
      <widget class="QCheckBox" name="currenciesNationalCurrensyCheckBox">
       <property name="text">
        <string>National</string>
+      </property>
+      <property name="tristate">
+       <bool>false</bool>
       </property>
      </widget>
     </item>
@@ -110,13 +143,45 @@
    <property name="geometry">
     <rect>
      <x>140</x>
-     <y>220</y>
+     <y>140</y>
      <width>160</width>
-     <height>26</height>
+     <height>31</height>
     </rect>
    </property>
    <property name="standardButtons">
     <set>QDialogButtonBox::Cancel|QDialogButtonBox::Ok</set>
+   </property>
+   <property name="centerButtons">
+    <bool>true</bool>
+   </property>
+  </widget>
+  <widget class="QLabel" name="currenciesIdLabel">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>150</y>
+     <width>16</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>ID:</string>
+   </property>
+  </widget>
+  <widget class="QLineEdit" name="currenciesIdLineEdit">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="geometry">
+    <rect>
+     <x>27</x>
+     <y>147</y>
+     <width>80</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="readOnly">
+    <bool>true</bool>
    </property>
   </widget>
  </widget>
@@ -135,22 +200,6 @@
    <signal>rejected()</signal>
    <receiver>currencysChangeDialog</receiver>
    <slot>close()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>219</x>
-     <y>232</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>154</x>
-     <y>130</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>currenciesButtonBox</sender>
-   <signal>accepted()</signal>
-   <receiver>currencysChangeDialog</receiver>
-   <slot>currensiesNew()</slot>
    <hints>
     <hint type="sourcelabel">
      <x>219</x>

@@ -18,19 +18,23 @@ class currencysChangeDialog : public QDialog
 public:
     explicit currencysChangeDialog(QWidget *parent = 0);
     ~currencysChangeDialog();
+    void currensiesNew();
+    void currensiesEdit(int currencyID, QString currencyName, QString currencyAltName, double currencyRate, bool currencyNational, int currencyCode);
 
 private:
     Ui::currencysChangeDialog *ui;
     QString currencyName;
     QString currencyAltName;
-    int currencyRate;
+    double currencyRate;
     int currencyCode;
     bool currencyNational;
+    int currencyID;
 
 
 private slots:
-    void currensiesNew();
-    void currensiesMod();
+    void currensiesInsert();
+    void currensiesUpdate();
+
 
 };
 

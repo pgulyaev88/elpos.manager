@@ -1,3 +1,4 @@
+#include <QtGui>
 #include <QApplication>
 #include <QMessageBox>
 #include <QSettings>
@@ -9,6 +10,9 @@
 #include <QLineEdit>
 #include <QDialogButtonBox>
 #include <QDialog>
+#include <QModelIndex>
+#include <QSqlQueryModel>
+#include <QSqlError>
 #include "currencyschangedialog.h"
 #include "ui_currencyschangedialog.h"
 
@@ -20,10 +24,27 @@ currencysChangeDialog::currencysChangeDialog(QWidget *parent) :
 }
 
 void currencysChangeDialog::currensiesNew(){
+    connect(ui->currenciesButtonBox,SIGNAL(accepted()),this,SLOT(currensiesInsert()));
+
+}
+
+void currencysChangeDialog::currensiesEdit(int currencyID, QString currencyName, QString currencyAltName, double currencyRate, bool currencyNational, int currencyCode){
+    connect(ui->currenciesButtonBox,SIGNAL(accepted()),this,SLOT(currensiesUpdate()));
+    ui->currenciesIdLineEdit->setText(QString::number(currencyID));
+    ui->currenciesNameLineEdit->setText(currencyName);
+    ui->currenciesAltName->setText(currencyAltName);
+    ui->currenciesRateLineEdit->setText(QString::number(currencyRate,'f',2));
+    ui->currenciesNationalCurrensyCheckBox->setChecked(currencyNational);
+    qDebug() << ui->currenciesRateLineEdit->text();
+    ui->currenciesCodeLineEdit->setText(QString::number(currencyCode));
+
+}
+
+void currencysChangeDialog::currensiesInsert(){
 
     currencyName = ui->currenciesNameLineEdit->text();
     currencyAltName = ui->currenciesAltName->text();
-    currencyRate = ui->currenciesRateLineEdit->text().toInt();
+    currencyRate = ui->currenciesRateLineEdit->text().toDouble();
     currencyCode = ui->currenciesCodeLineEdit->text().toInt();
     currencyNational = ui->currenciesNationalCurrensyCheckBox->checkState();
 
@@ -34,24 +55,54 @@ void currencysChangeDialog::currensiesNew(){
     qDebug() << "NationalCheck: " << currencyNational; //отладка
 
     QSqlDatabase::database();
-    QSqlQuery *queryCurrencyAdd =new QSqlQuery;
+    QSqlQuery *insertCurrency =new QSqlQuery;
 
-    queryCurrencyAdd->prepare("INSERT INTO currencies (currency_id,currency_name,currency_altname,currency_rate,currency_national,deleted)"
-                              "VALUES(nextval('currencies_currency_id_seq'::regclass), :currencyName, :currencyAltName, :currencyRate ,:currencyCode, :currencyNational, false)");
-    queryCurrencyAdd->bindValue(":currencyName",currencyName);
-    queryCurrencyAdd->bindValue(":currencyAltName",currencyAltName);
-    queryCurrencyAdd->bindValue(":currencyRate", currencyRate);
-    queryCurrencyAdd->bindValue(":currencyCode", currencyCode);
-    queryCurrencyAdd->bindValue(":currencyNational", currencyNational);
-    queryCurrencyAdd->exec();
-//    if(queryCurrencyAdd->lastError().isValid()) //временный камент для отладки, потом вернуть назад.
-        qDebug() << queryCurrencyAdd->lastError();
+    insertCurrency->prepare("INSERT INTO currencies (currency_id,currency_name,currency_altname, "
+                              "currency_rate,currency_code,currency_national,deleted) "
+                              "VALUES(nextval('currencies_currency_id_seq'::regclass), "
+                              ":currencyName, :currencyAltName, :currencyRate ,:currencyCode, :currencyNational, false)");
+    insertCurrency->bindValue(":currencyName",currencyName);
+    insertCurrency->bindValue(":currencyAltName",currencyAltName);
+    insertCurrency->bindValue(":currencyRate", currencyRate);
+    insertCurrency->bindValue(":currencyCode", currencyCode);
+    insertCurrency->bindValue(":currencyNational", currencyNational);
+    insertCurrency->exec();
+//    if(insertCurrency->lastError().isValid()) //временный камент для отладки, потом вернуть назад.
+        qDebug() << insertCurrency->executedQuery();
+    qDebug() << insertCurrency->lastError();
   //  currencysChangeDialog::close();
 
 }
 
-void currencysChangeDialog::currensiesMod(){
+void currencysChangeDialog::currensiesUpdate(){
+    currencyID = ui->currenciesIdLineEdit->text().toInt();
+    currencyName = ui->currenciesNameLineEdit->text();
+    currencyAltName = ui->currenciesAltName->text();
+    currencyRate = ui->currenciesRateLineEdit->text().toDouble();
+    currencyCode = ui->currenciesCodeLineEdit->text().toInt();
+    currencyNational = ui->currenciesNationalCurrensyCheckBox->checkState();
 
+    QSqlDatabase::database();
+    QSqlQuery *updateCurrency = new QSqlQuery;
+    updateCurrency->prepare("UPDATE currencies SET "
+                            "currency_name=:currencyName, "
+                            "currency_altname=:currencyAltName, "
+                            "currency_rate=:currencyRate, "
+                            "currency_code=:currencyCode, "
+                            "currency_national=:currencyNational "
+                            "WHERE "
+                            "currency_id=:currencyID");
+    updateCurrency->bindValue(":currencyName",currencyName);
+    updateCurrency->bindValue(":currencyAltName",currencyAltName);
+    updateCurrency->bindValue(":currencyRate", currencyRate);
+    updateCurrency->bindValue(":currencyCode", currencyCode);
+    updateCurrency->bindValue(":currencyNational", currencyNational);
+    updateCurrency->bindValue(":currencyID",currencyID);
+    updateCurrency->exec();
+//    if(updateCurrency->lastError().isValid())
+        qDebug() << updateCurrency->lastError();
+        qDebug() << updateCurrency->executedQuery();
+//  currencysChangeDialog::close();
 }
 
 currencysChangeDialog::~currencysChangeDialog()
