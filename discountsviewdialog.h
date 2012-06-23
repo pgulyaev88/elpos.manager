@@ -17,9 +17,14 @@ public:
 
 private:
     Ui::discountsViewDialog *ui;
+    QString discountsName;
+    int discountsPercent;
+    int discountsID;
+    int discountsCurrentID;
 
 private slots:
     void getDiscountsList();
+    void getDiscountsID();
     void discountsAdd();
     void discountsModify();
     void discountsDelete();

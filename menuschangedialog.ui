@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>307</width>
-    <height>256</height>
+    <height>222</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -19,7 +19,7 @@
      <x>10</x>
      <y>10</y>
      <width>291</width>
-     <height>201</height>
+     <height>171</height>
     </rect>
    </property>
    <layout class="QGridLayout" name="gridLayout">
@@ -65,11 +65,11 @@
     </item>
    </layout>
   </widget>
-  <widget class="QDialogButtonBox" name="buttonBox">
+  <widget class="QDialogButtonBox" name="menusButtonBox">
    <property name="geometry">
     <rect>
      <x>140</x>
-     <y>220</y>
+     <y>190</y>
      <width>160</width>
      <height>26</height>
     </rect>
@@ -82,7 +82,7 @@
  <resources/>
  <connections>
   <connection>
-   <sender>buttonBox</sender>
+   <sender>menusButtonBox</sender>
    <signal>rejected()</signal>
    <receiver>menusChangeDialog</receiver>
    <slot>close()</slot>

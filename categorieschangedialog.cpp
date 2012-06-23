@@ -24,11 +24,19 @@ categoriesChangeDialog::categoriesChangeDialog(QWidget *parent) :
     ui->setupUi(this);
 }
 
-void categoriesChangeDialog::categoryInsert(){
-    connect(ui->categoriesButtonBox,SIGNAL(accepted()),this,SLOT(categoryNew()));
+void categoriesChangeDialog::categoryNew(){
+    connect(ui->categoriesButtonBox,SIGNAL(accepted()),this,SLOT(categoryInsert()));
 }
 
-void categoriesChangeDialog::categoryNew(){
+void categoriesChangeDialog::categoryEdit(int categoryID, QString name, QString altname, int code){
+    connect(ui->categoriesButtonBox,SIGNAL(accepted()),this,SLOT(categoryUpdate()));
+    ui->categoriesNameLineEdit->setText(name);
+    ui->categoriesAltNameLineEdit->setText(altname);
+    ui->categoriesCodeLineEdit->setText(QString::number(code));
+    ui->categoriesIdLineEdit->setText(QString::number(categoryID));
+}
+
+void categoriesChangeDialog::categoryInsert(){
     qDebug() << trUtf8("Add Category");
     categoriesCode = ui->categoriesCodeLineEdit->text().toInt();
     categoriesName = ui->categoriesNameLineEdit->text();
@@ -48,20 +56,12 @@ void categoriesChangeDialog::categoryNew(){
     queryCategoryAdd->bindValue(":categoriesAltName",categoriesAltName);
     queryCategoryAdd->bindValue(":categoriesCode",categoriesCode);
     queryCategoryAdd->exec();
-//    if(queryCategoryAdd->lastError().isValid()) //временный камент для отладки, потом вернуть назад.
+    if(queryCategoryAdd->lastError().isValid()) //временный камент для отладки, потом вернуть назад.
     qDebug() << queryCategoryAdd->lastError();
     qDebug() << trUtf8("Запрос:") << queryCategoryAdd->executedQuery();
 
     categoriesChangeDialog::close();
 
-}
-
-void categoriesChangeDialog::categoryMod(int categoryID, QString name, QString altname, int code){
-    connect(ui->categoriesButtonBox,SIGNAL(accepted()),this,SLOT(categoryUpdate()));
-    ui->categoriesNameLineEdit->setText(name);
-    ui->categoriesAltNameLineEdit->setText(altname);
-    ui->categoriesCodeLineEdit->setText(QString::number(code));
-    ui->categoriesIdLineEdit->setText(QString::number(categoryID));
 }
 
 void categoriesChangeDialog::categoryUpdate(){
@@ -88,7 +88,7 @@ void categoriesChangeDialog::categoryUpdate(){
     updateCategory->bindValue(":categoriesName",categoriesName);
     updateCategory->bindValue(":categoriesAltName",categoriesAltName);
     updateCategory->exec();
-//    if(updateCategory->lastError().isValid())  //временный камент для отладки
+    if(updateCategory->lastError().isValid())  //временный камент для отладки
     qDebug() << updateCategory->lastError();
     qDebug() << updateCategory->executedQuery();
 

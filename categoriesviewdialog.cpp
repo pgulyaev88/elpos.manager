@@ -51,7 +51,7 @@ void categoriesViewDialog::getCategoryID(){
 
 void categoriesViewDialog::categoryAdd(){
     categoriesChangeDialog dialog(this);
-    dialog.categoryInsert();
+    dialog.categoryNew();
     dialog.exec();
     if(dialog.close())
     getCategoriesList();
@@ -83,7 +83,7 @@ void categoriesViewDialog::categoryModify(){
     }
 
     categoriesChangeDialog dialog(this);
-    dialog.categoryMod(categoryID,name,altname,code);
+    dialog.categoryEdit(categoryID,name,altname,code);
     dialog.exec();
     if(dialog.close())
     getCategoriesList();

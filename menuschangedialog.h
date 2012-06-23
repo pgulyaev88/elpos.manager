@@ -16,18 +16,22 @@ class menusChangeDialog : public QDialog
 public:
     explicit menusChangeDialog(QWidget *parent = 0);
     ~menusChangeDialog();
+    void menusNew();
+    void menusEdit();
 
 private:
     Ui::menusChangeDialog *ui;
+    int menuPrice;
+    int menuID;
     QString menuName;
     QString menuAltName;
-    float menuPrice;
-    QString categoryName;
     int categoryID;
+    int menuGroupID;
+    bool deleted;
 
 private slots:
-    void menusAdd();
-    void menusMod();
+    void menusInsert();
+    void menusUpdate();
     void getCategoryFromMenu();
 };
 

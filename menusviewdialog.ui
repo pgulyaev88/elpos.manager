@@ -108,14 +108,24 @@
   <widget class="QTableView" name="menusTableView">
    <property name="geometry">
     <rect>
-     <x>10</x>
+     <x>320</x>
      <y>10</y>
-     <width>670</width>
+     <width>361</width>
      <height>540</height>
     </rect>
    </property>
    <property name="lineWidth">
     <number>2</number>
+   </property>
+  </widget>
+  <widget class="QTreeView" name="menusTreeView">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>10</y>
+     <width>301</width>
+     <height>541</height>
+    </rect>
    </property>
   </widget>
  </widget>

@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>253</width>
-    <height>139</height>
+    <height>119</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -19,7 +19,7 @@
      <x>10</x>
      <y>10</y>
      <width>231</width>
-     <height>81</height>
+     <height>71</height>
     </rect>
    </property>
    <layout class="QGridLayout" name="gridLayout">
@@ -30,14 +30,14 @@
      <widget class="QLineEdit" name="discountsPercentLineEdit"/>
     </item>
     <item row="0" column="0">
-     <widget class="QLabel" name="label">
+     <widget class="QLabel" name="discountsNameLabel">
       <property name="text">
        <string>DiscountName</string>
       </property>
      </widget>
     </item>
     <item row="1" column="0">
-     <widget class="QLabel" name="label_2">
+     <widget class="QLabel" name="discountsPercentLabel">
       <property name="text">
        <string>DiscountPercent</string>
       </property>
@@ -45,11 +45,11 @@
     </item>
    </layout>
   </widget>
-  <widget class="QDialogButtonBox" name="buttonBox">
+  <widget class="QDialogButtonBox" name="discountsButtonBox">
    <property name="geometry">
     <rect>
      <x>80</x>
-     <y>100</y>
+     <y>90</y>
      <width>160</width>
      <height>26</height>
     </rect>
@@ -58,11 +58,40 @@
     <set>QDialogButtonBox::Cancel|QDialogButtonBox::Ok</set>
    </property>
   </widget>
+  <widget class="QLabel" name="discountsIdLabel">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>87</y>
+     <width>10</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>ID:</string>
+   </property>
+  </widget>
+  <widget class="QLineEdit" name="discountsIdLineEdit">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="geometry">
+    <rect>
+     <x>24</x>
+     <y>87</y>
+     <width>41</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="readOnly">
+    <bool>true</bool>
+   </property>
+  </widget>
  </widget>
  <resources/>
  <connections>
   <connection>
-   <sender>buttonBox</sender>
+   <sender>discountsButtonBox</sender>
    <signal>rejected()</signal>
    <receiver>discountsChangeDialog</receiver>
    <slot>close()</slot>

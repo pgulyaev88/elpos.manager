@@ -19,8 +19,9 @@ public:
     explicit categoriesChangeDialog(QWidget *parent = 0);
     ~categoriesChangeDialog();
 //    int categoryID;
-    void categoryMod(int categoryID, QString name, QString altname, int code);
-    void categoryInsert();
+    void categoryNew();
+    void categoryEdit(int categoryID, QString name, QString altname, int code);
+
 
 private:
     Ui::categoriesChangeDialog *ui;
@@ -36,7 +37,7 @@ private:
 
 
 private slots:
-    void categoryNew();
+    void categoryInsert();
     void categoryUpdate();
 };
 

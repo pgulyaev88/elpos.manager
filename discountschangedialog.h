@@ -16,15 +16,19 @@ class discountsChangeDialog : public QDialog
 public:
     explicit discountsChangeDialog(QWidget *parent = 0);
     ~discountsChangeDialog();
+    void discountNew();
+    void discountEdit(int discountsID, QString discountsName, int discountsPercent);
 
 private:
     Ui::discountsChangeDialog *ui;
-    QString discountName;
-    float discountPercent;
+    QString discountsName;
+    int discountsPercent;
+    int discountsID;
+    int discountsCurrentID;
 
 private slots:
-    void discountNew();
-    void discountMod();
+    void discountInsert();
+    void discountUpdate();
 };
 
 #endif // DISCOUNTSCHANGEDIALOG_H

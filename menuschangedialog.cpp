@@ -23,23 +23,36 @@ void menusChangeDialog::getCategoryFromMenu(){
 
     QSqlDatabase::database();
     QSqlQueryModel *getCategoryList = new QSqlQueryModel;
-    getCategoryList->setQuery("SELECT category_id, category_name FROM categories WHERE deleted='false'");
+    getCategoryList->setQuery("SELECT name FROM categories WHERE deleted='false'");
 
     qDebug() << "Query: " << getCategoryList;
     if(getCategoryList->lastError().isValid())
         qDebug() << getCategoryList->lastError();
 
     ui->menusComboBox->setModel(getCategoryList);
+
 }
 
-void menusChangeDialog::menusAdd(){
+void menusChangeDialog::menusNew(){
+    connect(ui->menusButtonBox,SIGNAL(accepted()),this,SLOT(menusInsert()));
+
+}
+
+void menusChangeDialog::menusEdit(){
+    connect(ui->menusButtonBox,SIGNAL(accepted()),this,SLOT(menusUpdate()));
+
+}
+
+void menusChangeDialog::menusInsert(){
+    getCategoryFromMenu();
     menuName = ui->menusNameLineEdit->text();
     menuAltName = ui->menusAltNameLineEdit->text();
-    menuPrice = ui->menusPriceLineEdit->text().toFloat();
+    menuPrice = ui->menusPriceLineEdit->text().toInt();
 
 }
 
-void menusChangeDialog::menusMod(){
+void menusChangeDialog::menusUpdate(){
+    getCategoryFromMenu();
 
 }
 

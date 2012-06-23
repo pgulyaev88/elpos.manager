@@ -17,9 +17,18 @@ public:
 
 private:
     Ui::menusViewDialog *ui;
+    int menuPrice;
+    int menuID;
+    QString menuName;
+    QString menuAltName;
+    int categoryID;
+    int menuGroupID;
+    bool deleted;
+    int menuCurrentID;
 
 private slots:
     void getMenusList();
+    void getMenusID();
     void menusAdd();
     void menusModify();
     void menusDelete();

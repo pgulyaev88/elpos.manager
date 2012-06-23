@@ -109,6 +109,7 @@ void currencysViewDialog::currensiesModify(){
     currencysChangeDialog dialog(this);
     dialog.currensiesEdit(currensyID,currensyName,currensAltName,currensyRate,currensyNational,currensyCode);
     dialog.exec();
+    if(dialog.close());
     getCurrenciesList();
 }
 
