@@ -2,6 +2,7 @@
 #include <QMessageBox>
 #include <QSettings>
 #include <QSqlDatabase>
+#include <QSqlQuery>
 #include <QSqlQueryModel>
 #include <QSqlError>
 #include <QTableView>
@@ -22,37 +23,43 @@ menusChangeDialog::menusChangeDialog(QWidget *parent) :
 void menusChangeDialog::getCategoryFromMenu(){
 
     QSqlDatabase::database();
-    QSqlQueryModel *getCategoryList = new QSqlQueryModel;
-    getCategoryList->setQuery("SELECT name FROM categories WHERE deleted='false'");
+    QSqlQuery getCategoryList("SELECT category_id, name FROM categories WHERE deleted='false'");
+    if(getCategoryList.lastError().isValid())
+        qDebug() << getCategoryList.lastError();
+    while(getCategoryList.next()){
+    int categoryid = getCategoryList.value(0).toInt();
+    QString categoryName = getCategoryList.value(1).toString();
 
-    qDebug() << "Query: " << getCategoryList;
-    if(getCategoryList->lastError().isValid())
-        qDebug() << getCategoryList->lastError();
+    ui->menusComboBox->insertItem(categoryid,categoryName);
 
-    ui->menusComboBox->setModel(getCategoryList);
+}
 
 }
 
 void menusChangeDialog::menusNew(){
+    getCategoryFromMenu();
     connect(ui->menusButtonBox,SIGNAL(accepted()),this,SLOT(menusInsert()));
 
 }
 
 void menusChangeDialog::menusEdit(){
+    getCategoryFromMenu();
     connect(ui->menusButtonBox,SIGNAL(accepted()),this,SLOT(menusUpdate()));
 
 }
 
 void menusChangeDialog::menusInsert(){
-    getCategoryFromMenu();
     menuName = ui->menusNameLineEdit->text();
     menuAltName = ui->menusAltNameLineEdit->text();
     menuPrice = ui->menusPriceLineEdit->text().toInt();
+    qDebug() << menuName;
+    qDebug() << menuAltName;
+    qDebug() << menuPrice;
+    qDebug() << ui->menusComboBox->currentIndex();
 
 }
 
 void menusChangeDialog::menusUpdate(){
-    getCategoryFromMenu();
 
 }
 

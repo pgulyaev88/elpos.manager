@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>700</width>
-    <height>620</height>
+    <width>691</width>
+    <height>611</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -105,25 +105,12 @@
     </item>
    </layout>
   </widget>
-  <widget class="QTableView" name="menusTableView">
-   <property name="geometry">
-    <rect>
-     <x>320</x>
-     <y>10</y>
-     <width>361</width>
-     <height>540</height>
-    </rect>
-   </property>
-   <property name="lineWidth">
-    <number>2</number>
-   </property>
-  </widget>
   <widget class="QTreeView" name="menusTreeView">
    <property name="geometry">
     <rect>
      <x>10</x>
      <y>10</y>
-     <width>301</width>
+     <width>671</width>
      <height>541</height>
     </rect>
    </property>

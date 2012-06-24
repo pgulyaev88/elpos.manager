@@ -58,6 +58,12 @@ FORMS    += mainwindow.ui \
     streetchangedialog.ui \
     settingsdialog.ui
 
+OTHER_FILES += \
+    dump.sql
+
+
+
+
 
 
 

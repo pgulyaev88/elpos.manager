@@ -22,16 +22,14 @@ menusViewDialog::menusViewDialog(QWidget *parent) :
 
 void menusViewDialog::getMenusList(){
     QSqlDatabase::database();
-
     QSqlQueryModel *getMenus = new QSqlQueryModel;
     getMenus->setQuery("SELECT "
-                       "c.name, "
-                       "g.group_name, "
-                       "c.category_id, "
-                       "g.menu_group_id, "
                        "m.menu_id, "
                        "m.name, "
+                       "m.altname, "
                        "m.price, "
+                       "c.name, "
+                       "g.group_name, "
                        "m.category_id, "
                        "m.menu_group_id, "
                        "g.deleted, "
@@ -49,15 +47,23 @@ void menusViewDialog::getMenusList(){
     getMenus->setHeaderData(1,Qt::Horizontal,QObject::trUtf8("Menu Name"));
     getMenus->setHeaderData(2,Qt::Horizontal,QObject::trUtf8("Alt Name"));
     getMenus->setHeaderData(3,Qt::Horizontal,QObject::trUtf8("Price"));
-    getMenus->setHeaderData(4,Qt::Horizontal,QObject::trUtf8("Category ID"));
-    getMenus->setHeaderData(5,Qt::Horizontal,QObject::trUtf8("Menu Group ID"));
-    getMenus->setHeaderData(6,Qt::Horizontal,QObject::trUtf8("Deleted"));
+    getMenus->setHeaderData(4,Qt::Horizontal,QObject::trUtf8("Category Name"));
+    getMenus->setHeaderData(5,Qt::Horizontal,QObject::trUtf8("Menu Group Name"));
+    getMenus->setHeaderData(6,Qt::Horizontal,QObject::trUtf8("Category ID"));
+    getMenus->setHeaderData(7,Qt::Horizontal,QObject::trUtf8("Menu Group ID"));
+    getMenus->setHeaderData(8,Qt::Horizontal,QObject::trUtf8("Group Deleted"));
+    getMenus->setHeaderData(9,Qt::Horizontal,QObject::trUtf8("Category Deleted"));
+    getMenus->setHeaderData(10,Qt::Horizontal,QObject::trUtf8("Menu Deleted"));
 //    if(getMenus->lastError().isValid())
         qDebug() << getMenus->lastError();
 
     ui->menusTreeView->setModel(getMenus);
-//    ui->menusTableView->hideColumn(6);
-//    ui->menusTableView->verticalHeader()->hide();
+
+    ui->menusTreeView->hideColumn(6);
+    ui->menusTreeView->hideColumn(7);
+    ui->menusTreeView->hideColumn(8);
+    ui->menusTreeView->hideColumn(9);
+    ui->menusTreeView->hideColumn(10);
     qDebug() << "Get Menu List";
 }
 
