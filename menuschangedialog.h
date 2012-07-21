@@ -17,7 +17,7 @@ public:
     explicit menusChangeDialog(QWidget *parent = 0);
     ~menusChangeDialog();
     void menusNew();
-    void menusEdit();
+    void menusEdit(int menuID, QString menuName, QString menuAltName, int menuPrice, int categoryID);
 
 private:
     Ui::menusChangeDialog *ui;

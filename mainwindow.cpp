@@ -24,11 +24,12 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
     loadDatabaseConnection();
+    MainWindow::setWindowTitle("ELPOS Manager");
 }
 
 void MainWindow::loadDatabaseConnection(){
     QSqlDatabase db = QSqlDatabase::addDatabase("QPSQL");
-    db.setHostName("192.168.1.33");
+    db.setHostName("127.0.0.1");
     db.setDatabaseName("elpos");
     db.setUserName("elpos");
     db.setPassword("elpos");

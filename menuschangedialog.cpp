@@ -29,26 +29,33 @@ void menusChangeDialog::getCategoryFromMenu(){
     while(getCategoryList.next()){
     int categoryid = getCategoryList.value(0).toInt();
     QString categoryName = getCategoryList.value(1).toString();
-
-    ui->menusComboBox->insertItem(categoryid,categoryName);
-
-}
-
+    ui->menusComboBox->insertItem(categoryid);
+    }
 }
 
 void menusChangeDialog::menusNew(){
     getCategoryFromMenu();
     connect(ui->menusButtonBox,SIGNAL(accepted()),this,SLOT(menusInsert()));
-
+    menusChangeDialog::setWindowTitle("Adding new menu");
 }
 
-void menusChangeDialog::menusEdit(){
+void menusChangeDialog::menusEdit(int menuID, QString menuName, QString menuAltName, int menuPrice, int categoryID){
     getCategoryFromMenu();
     connect(ui->menusButtonBox,SIGNAL(accepted()),this,SLOT(menusUpdate()));
+    menusChangeDialog::setWindowTitle("Modify menu");
+    ui->menusNameLineEdit->setText(menuName);
+    ui->menusAltNameLineEdit->setText(menuAltName);
+    ui->menusPriceLineEdit->setText(QString::number(menuPrice));
+//    ui->menusCategoryComboBox->
 
 }
 
 void menusChangeDialog::menusInsert(){
+//    QModelIndex categoryIndex = ui->menusComboBox->currentIndex();
+//    int selectedRow = categoryIndex.row();
+//    int dataIndex = ui->menusComboBox->model()->data(ui->menusComboBox->model()->index(selectedRow)).toInt();
+//    qDebug() << "Data Index" << dataIndex;
+
     menuName = ui->menusNameLineEdit->text();
     menuAltName = ui->menusAltNameLineEdit->text();
     menuPrice = ui->menusPriceLineEdit->text().toInt();
@@ -56,10 +63,12 @@ void menusChangeDialog::menusInsert(){
     qDebug() << menuAltName;
     qDebug() << menuPrice;
     qDebug() << ui->menusComboBox->currentIndex();
+//    menusChangeDialog::close();
 
 }
 
 void menusChangeDialog::menusUpdate(){
+
 
 }
 

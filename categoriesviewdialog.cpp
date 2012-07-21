@@ -21,6 +21,7 @@ categoriesViewDialog::categoriesViewDialog(QWidget *parent) :
     ui->setupUi(this);
     getCategoriesList();
     connect(ui->categoryTableView,SIGNAL(doubleClicked(QModelIndex)),this,SLOT(categoryModify()));
+    categoriesViewDialog::setWindowTitle("Browsing Categories");
 }
 
 void categoriesViewDialog::getCategoriesList(){

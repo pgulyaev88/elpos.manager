@@ -26,10 +26,12 @@ categoriesChangeDialog::categoriesChangeDialog(QWidget *parent) :
 
 void categoriesChangeDialog::categoryNew(){
     connect(ui->categoriesButtonBox,SIGNAL(accepted()),this,SLOT(categoryInsert()));
+    categoriesChangeDialog::setWindowTitle("Adding new category");
 }
 
 void categoriesChangeDialog::categoryEdit(int categoryID, QString name, QString altname, int code){
     connect(ui->categoriesButtonBox,SIGNAL(accepted()),this,SLOT(categoryUpdate()));
+    categoriesChangeDialog::setWindowTitle("Modify category");
     ui->categoriesNameLineEdit->setText(name);
     ui->categoriesAltNameLineEdit->setText(altname);
     ui->categoriesCodeLineEdit->setText(QString::number(code));

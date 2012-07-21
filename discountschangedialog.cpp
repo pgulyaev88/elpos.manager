@@ -25,10 +25,12 @@ discountsChangeDialog::discountsChangeDialog(QWidget *parent) :
 
 void discountsChangeDialog::discountNew(){
     connect(ui->discountsButtonBox,SIGNAL(accepted()),this,SLOT(discountInsert()));
+    discountsChangeDialog::setWindowTitle("Adding new discounts");
 }
 
 void discountsChangeDialog::discountEdit(int discountsID, QString discountsName, int discountsPercent){
     connect(ui->discountsButtonBox,SIGNAL(accepted()),this,SLOT(discountUpdate()));
+    discountsChangeDialog::setWindowTitle("Modify discounts");
     ui->discountsIdLineEdit->setText(QString::number(discountsID));
     ui->discountsNameLineEdit->setText(discountsName);
     ui->discountsPercentLineEdit->setText(QString::number(discountsPercent));

@@ -20,6 +20,7 @@ discountsViewDialog::discountsViewDialog(QWidget *parent) :
 {
     ui->setupUi(this);
     connect(ui->discountsTableView,SIGNAL(doubleClicked(QModelIndex)),this,SLOT(discountsModify()));
+    discountsViewDialog::setWindowTitle("Browsing Discounts");
     getDiscountsList();
 }
 

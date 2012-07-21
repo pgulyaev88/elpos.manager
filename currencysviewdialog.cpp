@@ -20,6 +20,7 @@ currencysViewDialog::currencysViewDialog(QWidget *parent) :
 {
     ui->setupUi(this);
     connect(ui->currenciesTableView,SIGNAL(doubleClicked(QModelIndex)),this,SLOT(currensiesModify()));
+    currencysViewDialog::setWindowTitle("Browsing Currencies");
     getCurrenciesList();
 }
 
@@ -110,7 +111,7 @@ void currencysViewDialog::currensiesModify(){
     currencysChangeDialog dialog(this);
     dialog.currensiesEdit(currensyID,currensyName,currensAltName,currensyRate,currensyNational,currensyCode);
     dialog.exec();
-    if(dialog.close());
+    if(dialog.close())
     getCurrenciesList();
 }
 

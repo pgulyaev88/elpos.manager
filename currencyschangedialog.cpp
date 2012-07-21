@@ -25,11 +25,13 @@ currencysChangeDialog::currencysChangeDialog(QWidget *parent) :
 
 void currencysChangeDialog::currensiesNew(){
     connect(ui->currenciesButtonBox,SIGNAL(accepted()),this,SLOT(currensiesInsert()));
+    currencysChangeDialog::setWindowTitle("Adding new currency");
 
 }
 
 void currencysChangeDialog::currensiesEdit(int currencyID, QString currencyName, QString currencyAltName, double currencyRate, bool currencyNational, int currencyCode){
     connect(ui->currenciesButtonBox,SIGNAL(accepted()),this,SLOT(currensiesUpdate()));
+    currencysChangeDialog::setWindowTitle("Modify currency");
     ui->currenciesIdLineEdit->setText(QString::number(currencyID));
     ui->currenciesNameLineEdit->setText(currencyName);
     ui->currenciesAltName->setText(currencyAltName);
@@ -67,10 +69,10 @@ void currencysChangeDialog::currensiesInsert(){
     insertCurrency->bindValue(":currencyCode", currencyCode);
     insertCurrency->bindValue(":currencyNational", currencyNational);
     insertCurrency->exec();
-//    if(insertCurrency->lastError().isValid()) //временный камент для отладки, потом вернуть назад.
+    if(insertCurrency->lastError().isValid()) //временный камент для отладки, потом вернуть назад.
         qDebug() << insertCurrency->executedQuery();
     qDebug() << insertCurrency->lastError();
-  //  currencysChangeDialog::close();
+    currencysChangeDialog::close();
 
 }
 
@@ -99,10 +101,10 @@ void currencysChangeDialog::currensiesUpdate(){
     updateCurrency->bindValue(":currencyNational", currencyNational);
     updateCurrency->bindValue(":currencyID",currencyID);
     updateCurrency->exec();
-//    if(updateCurrency->lastError().isValid())
+    if(updateCurrency->lastError().isValid())
         qDebug() << updateCurrency->lastError();
         qDebug() << updateCurrency->executedQuery();
-//  currencysChangeDialog::close();
+  currencysChangeDialog::close();
 }
 
 currencysChangeDialog::~currencysChangeDialog()

@@ -18,6 +18,7 @@ menusViewDialog::menusViewDialog(QWidget *parent) :
 {
     ui->setupUi(this);
     connect(ui->menusTreeView,SIGNAL(doubleClicked(QModelIndex)),this,SLOT(menusModify()));
+    menusViewDialog::setWindowTitle("Browsing Menu");
     getMenusList();
 }
 
@@ -68,11 +69,11 @@ void menusViewDialog::getMenusList(){
 }
 
 void menusViewDialog::getMenusID(){
-//    QModelIndex *menuIndex = ui->menusTableView->currentIndex();
-//    int selectedRow = menuIndex->row();
-//    int selectedColumn = 0;
-//    menuCurrentID = ui->menusTableView->model()->data(ui->menusTableView->model()->index(selectedRow,selectedColumn)).toInt();
-//    qDebug() << menuCurrentID;
+    QModelIndex menuIndex = ui->menusTreeView->currentIndex();
+    int selectedRow = menuIndex.row();
+    int selectedColumn = 0;
+    menuCurrentID = ui->menusTreeView->model()->data(ui->menusTreeView->model()->index(selectedRow,selectedColumn)).toInt();
+    qDebug() << menuCurrentID;
 
 }
 
@@ -85,8 +86,32 @@ void menusViewDialog::menusAdd(){
 }
 
 void menusViewDialog::menusModify(){
+    getMenusID();
+
+    QSqlQuery *getMenu = new QSqlQuery();
+    getMenu->prepare("SELECT menu_id, name, altname, price, category_id "
+                     "FROM public.menus "
+                     "WHERE deleted='0' "
+                     "AND menu_id=:menuCurrentID");
+    getMenu->bindValue(":menuCurrentID",menuCurrentID);
+    getMenu->exec();
+    if(getMenu->lastError().isValid())
+        qDebug() << trUtf8("Запрос:") << getMenu->executedQuery();
+    while (getMenu->next()){
+        menuID = getMenu->value(0).toInt();
+        menuName = getMenu->value(1).toString();
+        menuAltName = getMenu->value(2).toString();
+        menuPrice = getMenu->value(3).toInt();
+        categoryID = getMenu->value(4).toInt();
+        qDebug() << trUtf8("Menu ID: ") << menuID;
+        qDebug() << trUtf8("Menu Name: ") << menuName;
+        qDebug() << trUtf8("Menu Alt Name: ") << menuAltName;
+        qDebug() << trUtf8("Menu Price: ") << menuPrice;
+        qDebug() << trUtf8("Category ID: ") << categoryID;
+    }
+
     menusChangeDialog dialog(this);
-    dialog.menusEdit();
+    dialog.menusEdit(menuID,menuName,menuAltName,menuPrice,categoryID);
     dialog.exec();
     if(dialog.close())
         getMenusList();
