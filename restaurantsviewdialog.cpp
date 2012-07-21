@@ -15,6 +15,7 @@ restaurantsViewDialog::restaurantsViewDialog(QWidget *parent) :
     ui(new Ui::restaurantsViewDialog)
 {
     ui->setupUi(this);
+    connect(ui->restaurantsTableView,SIGNAL(doubleClicked(QModelIndex)),this,SLOT(restaurantsModify()));
     getRestaurantsList();
 }
 

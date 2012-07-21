@@ -20,6 +20,7 @@ categoriesViewDialog::categoriesViewDialog(QWidget *parent) :
 {
     ui->setupUi(this);
     getCategoriesList();
+    connect(ui->categoryTableView,SIGNAL(doubleClicked(QModelIndex)),this,SLOT(categoryModify()));
 }
 
 void categoriesViewDialog::getCategoriesList(){

@@ -17,6 +17,7 @@ menusViewDialog::menusViewDialog(QWidget *parent) :
     ui(new Ui::menusViewDialog)
 {
     ui->setupUi(this);
+    connect(ui->menusTreeView,SIGNAL(doubleClicked(QModelIndex)),this,SLOT(menusModify()));
     getMenusList();
 }
 
@@ -58,7 +59,6 @@ void menusViewDialog::getMenusList(){
         qDebug() << getMenus->lastError();
 
     ui->menusTreeView->setModel(getMenus);
-
     ui->menusTreeView->hideColumn(6);
     ui->menusTreeView->hideColumn(7);
     ui->menusTreeView->hideColumn(8);

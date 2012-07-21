@@ -15,6 +15,7 @@ streetViewDialog::streetViewDialog(QWidget *parent) :
     ui(new Ui::streetViewDialog)
 {
     ui->setupUi(this);
+    connect(ui->streetTableView,SIGNAL(doubleClicked(QModelIndex)),this,SLOT(streetsModiify()));
     getStreetList();
 }
 

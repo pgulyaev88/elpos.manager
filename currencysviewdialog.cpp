@@ -19,6 +19,7 @@ currencysViewDialog::currencysViewDialog(QWidget *parent) :
     ui(new Ui::currencysViewDialog)
 {
     ui->setupUi(this);
+    connect(ui->currenciesTableView,SIGNAL(doubleClicked(QModelIndex)),this,SLOT(currensiesModify()));
     getCurrenciesList();
 }
 
