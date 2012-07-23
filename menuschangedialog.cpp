@@ -29,7 +29,7 @@ void menusChangeDialog::getCategoryFromMenu(){
     while(getCategoryList.next()){
     int categoryid = getCategoryList.value(0).toInt();
     QString categoryName = getCategoryList.value(1).toString();
-    ui->menusComboBox->insertItem(categoryid);
+    ui->menusComboBox->insertItem(categoryid,categoryName);
     }
 }
 
@@ -50,6 +50,24 @@ void menusChangeDialog::menusEdit(int menuID, QString menuName, QString menuAltN
 
 }
 
+void menusChangeDialog::getCategoryByString(QString categoryName){
+    QSqlDatabase::database();
+
+    QSqlQuery *getCategory = new QSqlQuery();
+    getCategory->prepare("SELECT category_id FROM "
+                         "public.categories "
+                         "WHERE name=:categoryName "
+                         "AND deleted='0'");
+    getCategory->bindValue(":categoryName",categoryName);
+    getCategory->exec();
+    if(getCategory->lastError().isValid())
+        qDebug() << getCategory->lastError();
+    while(getCategory->next()){
+        categoryID = getCategory->value(0).toInt();
+    }
+
+}
+
 void menusChangeDialog::menusInsert(){
 //    QModelIndex categoryIndex = ui->menusComboBox->currentIndex();
 //    int selectedRow = categoryIndex.row();
@@ -62,7 +80,27 @@ void menusChangeDialog::menusInsert(){
     qDebug() << menuName;
     qDebug() << menuAltName;
     qDebug() << menuPrice;
-    qDebug() << ui->menusComboBox->currentIndex();
+    qDebug() << ui->menusComboBox->itemData(ui->menusComboBox->currentIndex(),Qt::DisplayRole).toString();
+    QString categoryName = ui->menusComboBox->itemData(ui->menusComboBox->currentIndex(),Qt::DisplayRole).toString();
+    getCategoryByString(categoryName);
+    qDebug() << categoryID;
+
+    QSqlDatabase::database();
+    QSqlQuery *addMenu = new QSqlQuery();
+    addMenu->prepare("INSERT INTO menus (menu_id,name,altname,price,category_id,menu_group_id,deleted) "
+                     "VALUES(nextval('menus_menu_id_seq'::regclass), "
+                     ":menuName, :menuAltName, :menuPrice,:categoryID,'1', false)");
+    addMenu->bindValue(":menuName",menuName);
+    addMenu->bindValue(":menuAltName",menuAltName);
+    addMenu->bindValue(":menuPrice",menuPrice);
+    addMenu->bindValue(":categoryID",categoryID);
+    addMenu->exec();
+    if(addMenu->lastError().isValid())
+        qDebug() << addMenu->lastError();
+        qDebug() << addMenu->lastQuery();
+        qDebug() << addMenu->executedQuery();
+
+
 //    menusChangeDialog::close();
 
 }

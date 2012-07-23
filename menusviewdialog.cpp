@@ -17,7 +17,7 @@ menusViewDialog::menusViewDialog(QWidget *parent) :
     ui(new Ui::menusViewDialog)
 {
     ui->setupUi(this);
-    connect(ui->menusTreeView,SIGNAL(doubleClicked(QModelIndex)),this,SLOT(menusModify()));
+    connect(ui->menusTableView,SIGNAL(doubleClicked(QModelIndex)),this,SLOT(menusModify()));
     menusViewDialog::setWindowTitle("Browsing Menu");
     getMenusList();
 }
@@ -59,20 +59,20 @@ void menusViewDialog::getMenusList(){
 //    if(getMenus->lastError().isValid())
         qDebug() << getMenus->lastError();
 
-    ui->menusTreeView->setModel(getMenus);
-    ui->menusTreeView->hideColumn(6);
-    ui->menusTreeView->hideColumn(7);
-    ui->menusTreeView->hideColumn(8);
-    ui->menusTreeView->hideColumn(9);
-    ui->menusTreeView->hideColumn(10);
+    ui->menusTableView->setModel(getMenus);
+    ui->menusTableView->hideColumn(6);
+    ui->menusTableView->hideColumn(7);
+    ui->menusTableView->hideColumn(8);
+    ui->menusTableView->hideColumn(9);
+    ui->menusTableView->hideColumn(10);
     qDebug() << "Get Menu List";
 }
 
 void menusViewDialog::getMenusID(){
-    QModelIndex menuIndex = ui->menusTreeView->currentIndex();
+    QModelIndex menuIndex = ui->menusTableView->currentIndex();
     int selectedRow = menuIndex.row();
     int selectedColumn = 0;
-    menuCurrentID = ui->menusTreeView->model()->data(ui->menusTreeView->model()->index(selectedRow,selectedColumn)).toInt();
+    menuCurrentID = ui->menusTableView->model()->data(ui->menusTableView->model()->index(selectedRow,selectedColumn)).toInt();
     qDebug() << menuCurrentID;
 
 }

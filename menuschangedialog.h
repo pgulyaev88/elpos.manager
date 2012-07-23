@@ -28,11 +28,13 @@ private:
     int categoryID;
     int menuGroupID;
     bool deleted;
+    QString categoryName;
 
 private slots:
     void menusInsert();
     void menusUpdate();
     void getCategoryFromMenu();
+    void getCategoryByString(QString categoryName);
 };
 
 #endif // MENUSCHANGEDIALOG_H

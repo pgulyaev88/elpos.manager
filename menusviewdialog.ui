@@ -105,12 +105,22 @@
     </item>
    </layout>
   </widget>
-  <widget class="QTreeView" name="menusTreeView">
+  <widget class="QTableView" name="menusTableView">
+   <property name="geometry">
+    <rect>
+     <x>170</x>
+     <y>10</y>
+     <width>511</width>
+     <height>541</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QTableView" name="menusGroupTableView">
    <property name="geometry">
     <rect>
      <x>10</x>
      <y>10</y>
-     <width>671</width>
+     <width>151</width>
      <height>541</height>
     </rect>
    </property>
