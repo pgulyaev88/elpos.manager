@@ -9,7 +9,7 @@
 #include <QDebug>
 #include "categoriesviewdialog.h"
 #include "categorieschangedialog.h"
-#include "currencysviewdialog.h"
+#include "currenciesviewdialog.h"
 #include "discountsviewdialog.h"
 #include "menusviewdialog.h"
 #include "restaurantsviewdialog.h"

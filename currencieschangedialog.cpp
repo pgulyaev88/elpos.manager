@@ -13,7 +13,7 @@
 #include <QModelIndex>
 #include <QSqlQueryModel>
 #include <QSqlError>
-#include "currencyschangedialog.h"
+#include "currencieschangedialog.h"
 #include "ui_currencyschangedialog.h"
 
 currencysChangeDialog::currencysChangeDialog(QWidget *parent) :

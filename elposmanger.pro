@@ -13,35 +13,35 @@ TEMPLATE = app
 SOURCES += main.cpp\
         mainwindow.cpp \
     categoriesviewdialog.cpp \
-    currencysviewdialog.cpp \
     menusviewdialog.cpp \
     restaurantsviewdialog.cpp \
     discountsviewdialog.cpp \
     streetviewdialog.cpp \
     categorieschangedialog.cpp \
-    currencyschangedialog.cpp \
     discountschangedialog.cpp \
     menuschangedialog.cpp \
     restaurantschangedialog.cpp \
     streetchangedialog.cpp \
     settingsdialog.cpp \
-    managercore.cpp
+    managercore.cpp \
+    currencieschangedialog.cpp \
+    currenciesviewdialog.cpp
 
 HEADERS  += mainwindow.h \
     categoriesviewdialog.h \
-    currencysviewdialog.h \
     menusviewdialog.h \
     restaurantsviewdialog.h \
     discountsviewdialog.h \
     streetviewdialog.h \
     categorieschangedialog.h \
-    currencyschangedialog.h \
     discountschangedialog.h \
     menuschangedialog.h \
     restaurantschangedialog.h \
     streetchangedialog.h \
     settingsdialog.h \
-    managercore.h
+    managercore.h \
+    currencieschangedialog.h \
+    currenciesviewdialog.h
 
 FORMS    += mainwindow.ui \
     categoriesviewdialog.ui \

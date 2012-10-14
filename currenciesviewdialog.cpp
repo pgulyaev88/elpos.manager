@@ -10,8 +10,8 @@
 #include <QSqlError>
 #include <QTableView>
 #include <QDebug>
-#include "currencysviewdialog.h"
-#include "currencyschangedialog.h"
+#include "currenciesviewdialog.h"
+#include "currencieschangedialog.h"
 #include "ui_currencysviewdialog.h"
 
 currencysViewDialog::currencysViewDialog(QWidget *parent) :
