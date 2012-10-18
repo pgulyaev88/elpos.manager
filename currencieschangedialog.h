@@ -25,7 +25,7 @@ private:
     Ui::currencysChangeDialog *ui;
     QString currencyName;
     QString currencyAltName;
-    double currencyRate;
+    QString currencyRate;
     int currencyCode;
     bool currencyNational;
     int currencyID;

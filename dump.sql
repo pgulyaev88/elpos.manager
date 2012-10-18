@@ -52,6 +52,15 @@ CREATE DOMAIN "D_DATE" AS date;
 ALTER DOMAIN public."D_DATE" OWNER TO elpos;
 
 --
+-- Name: D_DISCOUNT; Type: DOMAIN; Schema: public; Owner: elpos
+--
+
+CREATE DOMAIN "D_DISCOUNT" AS numeric(6,2);
+
+
+ALTER DOMAIN public."D_DISCOUNT" OWNER TO elpos;
+
+--
 -- Name: D_INTEGER; Type: DOMAIN; Schema: public; Owner: elpos
 --
 
@@ -61,22 +70,13 @@ CREATE DOMAIN "D_INTEGER" AS integer;
 ALTER DOMAIN public."D_INTEGER" OWNER TO elpos;
 
 --
--- Name: D_MONEY; Type: DOMAIN; Schema: public; Owner: elpos
+-- Name: D_PAY; Type: DOMAIN; Schema: public; Owner: elpos
 --
 
-CREATE DOMAIN "D_MONEY" AS money;
+CREATE DOMAIN "D_PAY" AS numeric(12,2);
 
 
-ALTER DOMAIN public."D_MONEY" OWNER TO elpos;
-
---
--- Name: D_NUMERIC12; Type: DOMAIN; Schema: public; Owner: elpos
---
-
-CREATE DOMAIN "D_NUMERIC12" AS numeric(12,2);
-
-
-ALTER DOMAIN public."D_NUMERIC12" OWNER TO elpos;
+ALTER DOMAIN public."D_PAY" OWNER TO elpos;
 
 --
 -- Name: D_SMALLINT; Type: DOMAIN; Schema: public; Owner: elpos
@@ -167,6 +167,74 @@ CREATE DOMAIN "D_TIME" AS time without time zone;
 
 
 ALTER DOMAIN public."D_TIME" OWNER TO elpos;
+
+--
+-- Name: CurrencyAdd("D_STRING25", "D_STRING25", "D_PAY", "D_INTEGER", "D_BOOL"); Type: FUNCTION; Schema: public; Owner: elpos
+--
+
+CREATE FUNCTION "CurrencyAdd"(currency_name "D_STRING25", currency_altname "D_STRING25", currency_rate "D_PAY", currency_code "D_INTEGER", currency_national "D_BOOL") RETURNS record
+    LANGUAGE plpgsql COST 50
+    AS $$
+DECLARE
+  delta_currency_name character varying;
+  delta_currency_altname character varying;
+  delta_currency_rate numeric;
+  delta_currency_code integer;
+  delta_currency_national boolean;
+
+BEGIN
+        delta_currency_name := currency_name;
+    delta_currency_altname := currency_altname;
+    delta_currency_rate := currency_rate;
+    delta_currency_code := currency_code;
+    delta_currency_national := currency_national;
+
+<<insert_currencies>>
+
+LOOP
+        INSERT INTO currencies (currency_id, currency_name, currency_altname,
+        currency_rate, currency_code, currency_national, deleted)
+    VALUES(nextval('currencies_currency_id_seq'::regclass), delta_currency_name,
+        delta_currency_altname, delta_currency_rate, delta_currency_code, delta_currency_national,
+        'FALSE');
+        EXIT insert_currencies WHEN found;
+    END LOOP insert_currencies;
+
+RETURN NULL;
+END;
+$$;
+
+
+ALTER FUNCTION public."CurrencyAdd"(currency_name "D_STRING25", currency_altname "D_STRING25", currency_rate "D_PAY", currency_code "D_INTEGER", currency_national "D_BOOL") OWNER TO elpos;
+
+--
+-- Name: DiscountAdd("D_STRING25", "D_DISCOUNT"); Type: FUNCTION; Schema: public; Owner: elpos
+--
+
+CREATE FUNCTION "DiscountAdd"(discount_name "D_STRING25", discount_percent "D_DISCOUNT") RETURNS record
+    LANGUAGE plpgsql COST 2
+    AS $$
+DECLARE
+  delta_discount_name character varying;
+  delta_discount_percent numeric;
+BEGIN
+  delta_discount_name := discount_name;
+  delta_discount_percent := discount_percent;
+        <<insert_discount>>
+LOOP
+        INSERT INTO discounts (discount_id, discount_name, discount_percent, deleted)
+    VALUES(nextval('discounts_discount_id_seq'::regclass), delta_discount_name,
+        delta_discount_percent, 'false');
+
+    EXIT insert_discount WHEN found;
+    END LOOP insert_discount;
+
+RETURN NULL;
+END;
+$$;
+
+
+ALTER FUNCTION public."DiscountAdd"(discount_name "D_STRING25", discount_percent "D_DISCOUNT") OWNER TO elpos;
 
 SET default_tablespace = '';
 
@@ -259,7 +327,7 @@ ALTER SEQUENCE categories_category_id_seq OWNED BY categories.category_id;
 -- Name: categories_category_id_seq; Type: SEQUENCE SET; Schema: public; Owner: elpos
 --
 
-SELECT pg_catalog.setval('categories_category_id_seq', 39, true);
+SELECT pg_catalog.setval('categories_category_id_seq', 40, true);
 
 
 --
@@ -317,7 +385,7 @@ CREATE TABLE currencies (
     currency_id integer NOT NULL,
     currency_name "D_STRING25",
     currency_altname "D_STRING25",
-    currency_rate "D_MONEY",
+    currency_rate "D_PAY",
     currency_national "D_BOOL",
     deleted "D_BOOL",
     currency_code "D_INTEGER"
@@ -351,7 +419,7 @@ ALTER SEQUENCE currencies_currency_id_seq OWNED BY currencies.currency_id;
 -- Name: currencies_currency_id_seq; Type: SEQUENCE SET; Schema: public; Owner: elpos
 --
 
-SELECT pg_catalog.setval('currencies_currency_id_seq', 95, true);
+SELECT pg_catalog.setval('currencies_currency_id_seq', 102, true);
 
 
 --
@@ -361,7 +429,7 @@ SELECT pg_catalog.setval('currencies_currency_id_seq', 95, true);
 CREATE TABLE discounts (
     discount_id integer NOT NULL,
     discount_name "D_STRING25",
-    discount_percent "D_SMALLINT",
+    discount_percent "D_DISCOUNT",
     deleted "D_BOOL"
 );
 
@@ -393,7 +461,7 @@ ALTER SEQUENCE discounts_discount_id_seq OWNED BY discounts.discount_id;
 -- Name: discounts_discount_id_seq; Type: SEQUENCE SET; Schema: public; Owner: elpos
 --
 
-SELECT pg_catalog.setval('discounts_discount_id_seq', 3, true);
+SELECT pg_catalog.setval('discounts_discount_id_seq', 23, true);
 
 
 --
@@ -446,7 +514,7 @@ CREATE TABLE menus (
     menu_id integer NOT NULL,
     name "D_STRING100",
     altname "D_STRING50",
-    price "D_MONEY",
+    price "D_PAY",
     category_id "D_INTEGER",
     menu_group_id "D_INTEGER",
     deleted "D_BOOL"
@@ -680,7 +748,7 @@ CREATE TABLE street (
     street_id integer NOT NULL,
     street_name "D_STRING250",
     count_house "D_INTEGER",
-    distance "D_NUMERIC12"
+    distance "D_PAY"
 );
 
 
@@ -900,8 +968,9 @@ ALTER TABLE ONLY zones ALTER COLUMN zone_id SET DEFAULT nextval('zones_zone_id_s
 -- Data for Name: categories; Type: TABLE DATA; Schema: public; Owner: elpos
 --
 
-INSERT INTO categories VALUES ('Bar', '', false, 1122, 38);
 INSERT INTO categories VALUES ('Pizza', '', true, 54564, 39);
+INSERT INTO categories VALUES ('gvsfsef', 'sefsefsef', false, 123123, 40);
+INSERT INTO categories VALUES ('Bar', '', true, 1122, 38);
 
 
 --
@@ -914,19 +983,35 @@ INSERT INTO categories VALUES ('Pizza', '', true, 54564, 39);
 -- Data for Name: currencies; Type: TABLE DATA; Schema: public; Owner: elpos
 --
 
-INSERT INTO currencies VALUES (92, 'adfad', 'eda', 'руб12.20', false, true, 123123);
-INSERT INTO currencies VALUES (93, '', '', 'руб13 131 231.23', false, true, 0);
-INSERT INTO currencies VALUES (95, 'sfse', 'qew', 'руб14 123 123.12', false, true, 124123);
-INSERT INTO currencies VALUES (94, 'wedaef', 'gha', 'руб10.20', true, true, 125123);
+INSERT INTO currencies VALUES (92, 'adfad', 'eda', 12.20, false, true, 123123);
+INSERT INTO currencies VALUES (93, '', '', 13131231.23, false, true, 0);
+INSERT INTO currencies VALUES (95, 'sfse', 'qew', 14123123.12, false, true, 124123);
+INSERT INTO currencies VALUES (94, 'wedaef', 'gha', 10.20, true, true, 125123);
+INSERT INTO currencies VALUES (96, 'wdawd', 'qwd', 12312313.21, true, true, 123123);
+INSERT INTO currencies VALUES (97, 'awdawd', 'QSQ', 0.00, true, false, 123123);
+INSERT INTO currencies VALUES (98, 'qweqweqweq', 'qwe', 1231231.23, false, false, 123123);
+INSERT INTO currencies VALUES (99, NULL, NULL, NULL, NULL, false, NULL);
+INSERT INTO currencies VALUES (100, NULL, NULL, NULL, false, false, NULL);
+INSERT INTO currencies VALUES (101, 'rgsdfg', 'AWDAWD', 1231.00, false, false, 123123);
+INSERT INTO currencies VALUES (102, 'dfsd', 'qda', 21243123.12, true, false, 123121);
 
 
 --
 -- Data for Name: discounts; Type: TABLE DATA; Schema: public; Owner: elpos
 --
 
-INSERT INTO discounts VALUES (3, 'wq', 11, false);
-INSERT INTO discounts VALUES (2, 'qwe', 15, false);
-INSERT INTO discounts VALUES (1, 'asd', 16, false);
+INSERT INTO discounts VALUES (3, 'wq', 11.00, false);
+INSERT INTO discounts VALUES (2, 'qwe', 15.00, false);
+INSERT INTO discounts VALUES (1, 'asd', 16.00, false);
+INSERT INTO discounts VALUES (13, 'sgd', 99.99, false);
+INSERT INTO discounts VALUES (14, 'zdzdvzsdv', 0.00, false);
+INSERT INTO discounts VALUES (15, 'dasdasd', 1234.56, false);
+INSERT INTO discounts VALUES (16, 'sdgfdj', 1234.56, false);
+INSERT INTO discounts VALUES (17, 'qasdasd', 1234.56, false);
+INSERT INTO discounts VALUES (18, 'qasdasd', 1234.56, false);
+INSERT INTO discounts VALUES (19, 'qasdasd', 1234.56, false);
+INSERT INTO discounts VALUES (22, 'qasdasd', 1234.56, false);
+INSERT INTO discounts VALUES (23, 'hjgjgjyfuygygu', 1234.45, false);
 
 
 --
@@ -1096,8 +1181,8 @@ ALTER TABLE ONLY zones
 REVOKE ALL ON SCHEMA public FROM PUBLIC;
 REVOKE ALL ON SCHEMA public FROM postgres;
 GRANT ALL ON SCHEMA public TO postgres;
-GRANT ALL ON SCHEMA public TO admin;
 GRANT ALL ON SCHEMA public TO elpos;
+GRANT ALL ON SCHEMA public TO admin;
 GRANT ALL ON SCHEMA public TO PUBLIC;
 
 
@@ -1132,6 +1217,15 @@ GRANT ALL ON TABLE categories TO PUBLIC;
 
 
 --
+-- Name: categories_category_id_seq; Type: ACL; Schema: public; Owner: elpos
+--
+
+REVOKE ALL ON SEQUENCE categories_category_id_seq FROM PUBLIC;
+REVOKE ALL ON SEQUENCE categories_category_id_seq FROM elpos;
+GRANT ALL ON SEQUENCE categories_category_id_seq TO elpos;
+
+
+--
 -- Name: clients; Type: ACL; Schema: public; Owner: elpos
 --
 
@@ -1159,6 +1253,15 @@ REVOKE ALL ON TABLE currencies FROM PUBLIC;
 REVOKE ALL ON TABLE currencies FROM elpos;
 GRANT ALL ON TABLE currencies TO elpos;
 GRANT ALL ON TABLE currencies TO PUBLIC;
+
+
+--
+-- Name: currencies_currency_id_seq; Type: ACL; Schema: public; Owner: elpos
+--
+
+REVOKE ALL ON SEQUENCE currencies_currency_id_seq FROM PUBLIC;
+REVOKE ALL ON SEQUENCE currencies_currency_id_seq FROM elpos;
+GRANT ALL ON SEQUENCE currencies_currency_id_seq TO elpos;
 
 
 --
@@ -1233,6 +1336,24 @@ GRANT ALL ON TABLE order_details TO postgres;
 
 
 --
+-- Name: order_details_order_details_id_seq; Type: ACL; Schema: public; Owner: elpos
+--
+
+REVOKE ALL ON SEQUENCE order_details_order_details_id_seq FROM PUBLIC;
+REVOKE ALL ON SEQUENCE order_details_order_details_id_seq FROM elpos;
+GRANT ALL ON SEQUENCE order_details_order_details_id_seq TO elpos;
+
+
+--
+-- Name: order_id_sq; Type: ACL; Schema: public; Owner: elpos
+--
+
+REVOKE ALL ON SEQUENCE order_id_sq FROM PUBLIC;
+REVOKE ALL ON SEQUENCE order_id_sq FROM elpos;
+GRANT ALL ON SEQUENCE order_id_sq TO elpos;
+
+
+--
 -- Name: orders; Type: ACL; Schema: public; Owner: elpos
 --
 
@@ -1240,6 +1361,15 @@ REVOKE ALL ON TABLE orders FROM PUBLIC;
 REVOKE ALL ON TABLE orders FROM elpos;
 GRANT ALL ON TABLE orders TO elpos;
 GRANT ALL ON TABLE orders TO PUBLIC;
+
+
+--
+-- Name: orders_order_id_seq; Type: ACL; Schema: public; Owner: elpos
+--
+
+REVOKE ALL ON SEQUENCE orders_order_id_seq FROM PUBLIC;
+REVOKE ALL ON SEQUENCE orders_order_id_seq FROM elpos;
+GRANT ALL ON SEQUENCE orders_order_id_seq TO elpos;
 
 
 --
@@ -1253,6 +1383,15 @@ GRANT ALL ON TABLE phones TO PUBLIC;
 
 
 --
+-- Name: phones_phone_id_seq; Type: ACL; Schema: public; Owner: elpos
+--
+
+REVOKE ALL ON SEQUENCE phones_phone_id_seq FROM PUBLIC;
+REVOKE ALL ON SEQUENCE phones_phone_id_seq FROM elpos;
+GRANT ALL ON SEQUENCE phones_phone_id_seq TO elpos;
+
+
+--
 -- Name: restaurants; Type: ACL; Schema: public; Owner: elpos
 --
 
@@ -1260,6 +1399,15 @@ REVOKE ALL ON TABLE restaurants FROM PUBLIC;
 REVOKE ALL ON TABLE restaurants FROM elpos;
 GRANT ALL ON TABLE restaurants TO elpos;
 GRANT ALL ON TABLE restaurants TO PUBLIC;
+
+
+--
+-- Name: restaurants_restaurant_id_seq; Type: ACL; Schema: public; Owner: elpos
+--
+
+REVOKE ALL ON SEQUENCE restaurants_restaurant_id_seq FROM PUBLIC;
+REVOKE ALL ON SEQUENCE restaurants_restaurant_id_seq FROM elpos;
+GRANT ALL ON SEQUENCE restaurants_restaurant_id_seq TO elpos;
 
 
 --
@@ -1273,6 +1421,15 @@ GRANT ALL ON TABLE street TO PUBLIC;
 
 
 --
+-- Name: street_street_id_seq; Type: ACL; Schema: public; Owner: elpos
+--
+
+REVOKE ALL ON SEQUENCE street_street_id_seq FROM PUBLIC;
+REVOKE ALL ON SEQUENCE street_street_id_seq FROM elpos;
+GRANT ALL ON SEQUENCE street_street_id_seq TO elpos;
+
+
+--
 -- Name: zone_details; Type: ACL; Schema: public; Owner: elpos
 --
 
@@ -1283,6 +1440,15 @@ GRANT ALL ON TABLE zone_details TO PUBLIC;
 
 
 --
+-- Name: zone_details_zone_details_id_seq; Type: ACL; Schema: public; Owner: elpos
+--
+
+REVOKE ALL ON SEQUENCE zone_details_zone_details_id_seq FROM PUBLIC;
+REVOKE ALL ON SEQUENCE zone_details_zone_details_id_seq FROM elpos;
+GRANT ALL ON SEQUENCE zone_details_zone_details_id_seq TO elpos;
+
+
+--
 -- Name: zones; Type: ACL; Schema: public; Owner: elpos
 --
 
@@ -1290,6 +1456,15 @@ REVOKE ALL ON TABLE zones FROM PUBLIC;
 REVOKE ALL ON TABLE zones FROM elpos;
 GRANT ALL ON TABLE zones TO elpos;
 GRANT ALL ON TABLE zones TO PUBLIC;
+
+
+--
+-- Name: zones_zone_id_seq; Type: ACL; Schema: public; Owner: elpos
+--
+
+REVOKE ALL ON SEQUENCE zones_zone_id_seq FROM PUBLIC;
+REVOKE ALL ON SEQUENCE zones_zone_id_seq FROM elpos;
+GRANT ALL ON SEQUENCE zones_zone_id_seq TO elpos;
 
 
 --

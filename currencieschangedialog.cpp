@@ -46,7 +46,7 @@ void currencysChangeDialog::currensiesInsert(){
 
     currencyName = ui->currenciesNameLineEdit->text();
     currencyAltName = ui->currenciesAltName->text();
-    currencyRate = ui->currenciesRateLineEdit->text().toDouble();
+    currencyRate = QString::number(ui->currenciesRateLineEdit->text().toDouble(),'f',2);
     currencyCode = ui->currenciesCodeLineEdit->text().toInt();
     currencyNational = ui->currenciesNationalCurrensyCheckBox->checkState();
 
@@ -59,10 +59,7 @@ void currencysChangeDialog::currensiesInsert(){
     QSqlDatabase::database();
     QSqlQuery *insertCurrency =new QSqlQuery;
 
-    insertCurrency->prepare("INSERT INTO currencies (currency_id,currency_name,currency_altname, "
-                              "currency_rate,currency_code,currency_national,deleted) "
-                              "VALUES(nextval('currencies_currency_id_seq'::regclass), "
-                              ":currencyName, :currencyAltName, :currencyRate ,:currencyCode, :currencyNational, false)");
+    insertCurrency->prepare("SELECT public.\"CurrencyAdd\"(:currencyName, :currencyAltName, :currencyRate ,:currencyCode, :currencyNational)");
     insertCurrency->bindValue(":currencyName",currencyName);
     insertCurrency->bindValue(":currencyAltName",currencyAltName);
     insertCurrency->bindValue(":currencyRate", currencyRate);
@@ -80,7 +77,7 @@ void currencysChangeDialog::currensiesUpdate(){
     currencyID = ui->currenciesIdLineEdit->text().toInt();
     currencyName = ui->currenciesNameLineEdit->text();
     currencyAltName = ui->currenciesAltName->text();
-    currencyRate = ui->currenciesRateLineEdit->text().toDouble();
+    currencyRate = QString::number(ui->currenciesRateLineEdit->text().toDouble(),'f',2);
     currencyCode = ui->currenciesCodeLineEdit->text().toInt();
     currencyNational = ui->currenciesNationalCurrensyCheckBox->checkState();
 

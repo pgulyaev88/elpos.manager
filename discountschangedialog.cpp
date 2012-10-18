@@ -38,7 +38,9 @@ void discountsChangeDialog::discountEdit(int discountsID, QString discountsName,
 
 void discountsChangeDialog::discountInsert(){
     discountsName = ui->discountsNameLineEdit->text();
-    discountsPercent = ui->discountsPercentLineEdit->text().toInt();
+//    discountsPercent = ui->discountsPercentLineEdit->text().toDouble();
+    discountsPercent = QString::number(ui->discountsPercentLineEdit->text().toDouble(),'f',2);
+//    qDebug() << "Percent:" << QString::number(ui->discountsPercentLineEdit->text().toDouble(),'f',2);
 
     qDebug() << "Name: " << discountsName;
     qDebug() << "Percent: " << discountsPercent;
@@ -46,15 +48,14 @@ void discountsChangeDialog::discountInsert(){
     QSqlDatabase::database();
     QSqlQuery *insertDiscount = new QSqlQuery;
 
-    insertDiscount->prepare("INSERT INTO discounts (discount_id, discount_name, discount_percent, deleted) "
-                              "VALUES(nextval('discounts_discount_id_seq'::regclass), :discount_name, :discount_percent, false)");
+    insertDiscount->prepare("SELECT public.\"DiscountAdd\"(:discount_name, :discount_percent)");
     insertDiscount->bindValue(":discount_name", discountsName);
     insertDiscount->bindValue(":discount_percent", discountsPercent);
     insertDiscount->exec();
-//    if(insertDiscount->lastError().isValid())
+    if(insertDiscount->lastError().isValid())
         qDebug() << insertDiscount->lastError();
         qDebug() << insertDiscount->executedQuery();
-//    discountsChangeDialog::close();
+    discountsChangeDialog::close();
 
 }
 

@@ -22,7 +22,7 @@ public:
 private:
     Ui::discountsChangeDialog *ui;
     QString discountsName;
-    int discountsPercent;
+    QString discountsPercent;
     int discountsID;
     int discountsCurrentID;
 
