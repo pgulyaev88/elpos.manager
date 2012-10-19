@@ -208,6 +208,81 @@ $$;
 ALTER FUNCTION public."CurrencyAdd"(currency_name "D_STRING25", currency_altname "D_STRING25", currency_rate "D_PAY", currency_code "D_INTEGER", currency_national "D_BOOL") OWNER TO elpos;
 
 --
+-- Name: CurrencyDel("D_INTEGER"); Type: FUNCTION; Schema: public; Owner: elpos
+--
+
+CREATE FUNCTION "CurrencyDel"(currency_id "D_INTEGER") RETURNS record
+    LANGUAGE plpgsql
+    AS $$
+DECLARE
+  delta_currency_id integer;
+
+BEGIN
+    delta_currency_id := currency_id;
+
+<<update_currencies>>
+
+LOOP
+        UPDATE currencies
+    SET deleted = 'TRUE'
+    WHERE
+        currency_id = delta_currency_id;
+        EXIT update_currencies WHEN found;
+    END LOOP update_currencies;
+
+RETURN NULL;
+END;
+$$;
+
+
+ALTER FUNCTION public."CurrencyDel"(currency_id "D_INTEGER") OWNER TO elpos;
+
+--
+-- Name: CurrencyMod("D_INTEGER", "D_STRING25", "D_STRING25", "D_PAY", "D_INTEGER", "D_BOOL"); Type: FUNCTION; Schema: public; Owner: elpos
+--
+
+CREATE FUNCTION "CurrencyMod"(currency_id "D_INTEGER", currency_name "D_STRING25", currency_altname "D_STRING25", currency_rate "D_PAY", currency_code "D_INTEGER", currency_national "D_BOOL") RETURNS record
+    LANGUAGE plpgsql
+    AS $$
+DECLARE
+  delta_currency_name character varying;
+  delta_currency_altname character varying;
+  delta_currency_rate numeric;
+  delta_currency_code integer;
+  delta_currency_national boolean;
+  delta_currency_id integer;
+
+BEGIN
+        delta_currency_name := currency_name;
+    delta_currency_altname := currency_altname;
+    delta_currency_rate := currency_rate;
+    delta_currency_code := currency_code;
+    delta_currency_national := currency_national;
+    delta_currency_id := currency_id;
+
+<<update_currencies>>
+
+LOOP
+        UPDATE currencies
+    SET currency_name = delta_currency_name,
+        currency_altname = delta_currency_altname,
+        currency_rate = delta_currency_rate,
+        currency_code = delta_currency_code,
+        currency_national = delta_currency_national,
+        deleted = 'FALSE'
+    WHERE
+        currency_id = delta_currency_id;
+        EXIT update_currencies WHEN found;
+    END LOOP update_currencies;
+
+RETURN NULL;
+END;
+$$;
+
+
+ALTER FUNCTION public."CurrencyMod"(currency_id "D_INTEGER", currency_name "D_STRING25", currency_altname "D_STRING25", currency_rate "D_PAY", currency_code "D_INTEGER", currency_national "D_BOOL") OWNER TO elpos;
+
+--
 -- Name: DiscountAdd("D_STRING25", "D_DISCOUNT"); Type: FUNCTION; Schema: public; Owner: elpos
 --
 
@@ -235,6 +310,68 @@ $$;
 
 
 ALTER FUNCTION public."DiscountAdd"(discount_name "D_STRING25", discount_percent "D_DISCOUNT") OWNER TO elpos;
+
+--
+-- Name: DiscountDel("D_INTEGER"); Type: FUNCTION; Schema: public; Owner: elpos
+--
+
+CREATE FUNCTION "DiscountDel"(discount_id "D_INTEGER") RETURNS record
+    LANGUAGE plpgsql
+    AS $$
+DECLARE
+  delta_discount_id integer;
+
+BEGIN
+  delta_discount_id := discount_id;
+
+        <<update_discount>>
+LOOP
+        UPDATE discounts
+    SET deleted = 'TRUE'
+    WHERE discount_id = delta_discount_id;
+    EXIT update_discount WHEN found;
+    END LOOP update_discount;
+
+RETURN NULL;
+END;
+$$;
+
+
+ALTER FUNCTION public."DiscountDel"(discount_id "D_INTEGER") OWNER TO elpos;
+
+--
+-- Name: DiscountMod("D_INTEGER", "D_STRING25", "D_DISCOUNT"); Type: FUNCTION; Schema: public; Owner: elpos
+--
+
+CREATE FUNCTION "DiscountMod"(discount_id "D_INTEGER", discount_name "D_STRING25", discount_percent "D_DISCOUNT") RETURNS record
+    LANGUAGE plpgsql
+    AS $$
+DECLARE
+  delta_discount_name character varying;
+  delta_discount_percent numeric;
+  delta_discount_id integer;
+
+BEGIN
+  delta_discount_id := discount_id;
+  delta_discount_name := discount_name;
+  delta_discount_percent := discount_percent;
+
+        <<update_discount>>
+LOOP
+        UPDATE discounts
+    SET discount_name = delta_discount_name,
+        discount_percent = delta_discount_percent,
+        deleted = 'FALSE'
+    WHERE discount_id = delta_discount_id;
+    EXIT update_discount WHEN found;
+    END LOOP update_discount;
+
+RETURN NULL;
+END;
+$$;
+
+
+ALTER FUNCTION public."DiscountMod"(discount_id "D_INTEGER", discount_name "D_STRING25", discount_percent "D_DISCOUNT") OWNER TO elpos;
 
 SET default_tablespace = '';
 
@@ -461,7 +598,7 @@ ALTER SEQUENCE discounts_discount_id_seq OWNED BY discounts.discount_id;
 -- Name: discounts_discount_id_seq; Type: SEQUENCE SET; Schema: public; Owner: elpos
 --
 
-SELECT pg_catalog.setval('discounts_discount_id_seq', 23, true);
+SELECT pg_catalog.setval('discounts_discount_id_seq', 24, true);
 
 
 --
@@ -1012,6 +1149,7 @@ INSERT INTO discounts VALUES (18, 'qasdasd', 1234.56, false);
 INSERT INTO discounts VALUES (19, 'qasdasd', 1234.56, false);
 INSERT INTO discounts VALUES (22, 'qasdasd', 1234.56, false);
 INSERT INTO discounts VALUES (23, 'hjgjgjyfuygygu', 1234.45, false);
+INSERT INTO discounts VALUES (24, 'ftyft', 3243.23, false);
 
 
 --

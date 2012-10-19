@@ -94,10 +94,7 @@ void discountsViewDialog::discountsDelete(){
     getDiscountsID();
 
     QSqlQuery *removeDiscounts = new QSqlQuery;
-    removeDiscounts->prepare("UPDATE public.discounts SET "
-                             "discounts.deleted ='true' "
-                             "WHERE "
-                             "discounts.discount_id=:discountsCurrentID");
+    removeDiscounts->prepare("SELECT public.\"DiscountAdd\"(:discountsCurrentID)");
     removeDiscounts->bindValue(":discountsCurrentID",discountsCurrentID);
     removeDiscounts->exec();
 //    if(removeDiscounts->lastError().isValid())

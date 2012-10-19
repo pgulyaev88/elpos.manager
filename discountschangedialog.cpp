@@ -28,12 +28,12 @@ void discountsChangeDialog::discountNew(){
     discountsChangeDialog::setWindowTitle("Adding new discounts");
 }
 
-void discountsChangeDialog::discountEdit(int discountsID, QString discountsName, int discountsPercent){
+void discountsChangeDialog::discountEdit(int discountsID, QString discountsName, QString discountsPercent){
     connect(ui->discountsButtonBox,SIGNAL(accepted()),this,SLOT(discountUpdate()));
     discountsChangeDialog::setWindowTitle("Modify discounts");
     ui->discountsIdLineEdit->setText(QString::number(discountsID));
     ui->discountsNameLineEdit->setText(discountsName);
-    ui->discountsPercentLineEdit->setText(QString::number(discountsPercent));
+    ui->discountsPercentLineEdit->setText(QString::number(discountsPercent.toDouble(),'f',2));
 }
 
 void discountsChangeDialog::discountInsert(){
@@ -62,16 +62,11 @@ void discountsChangeDialog::discountInsert(){
 void discountsChangeDialog::discountUpdate(){
     discountsID = ui->discountsIdLineEdit->text().toInt();
     discountsName = ui->discountsNameLineEdit->text();
-    discountsPercent = ui->discountsPercentLineEdit->text().toInt();
+    discountsPercent = QString::number(ui->discountsPercentLineEdit->text().toDouble(),'f',2);
 
     QSqlDatabase::database();
     QSqlQuery *updateDiscounts = new QSqlQuery;
-    updateDiscounts->prepare("UPDATE discounts SET "
-                             "discount_name=:discount_name, "
-                             "discount_percent=:discount_percent "
-                             "WHERE "
-                             "deleted='false' "
-                             "AND discount_id=:discount_id");
+    updateDiscounts->prepare("SELECT public.\"DiscountMod\"(:discount_id,:discount_name,:discount_percent)");
     updateDiscounts->bindValue(":discount_id", discountsID);
     updateDiscounts->bindValue(":discount_name", discountsName);
     updateDiscounts->bindValue(":discount_percent", discountsPercent);

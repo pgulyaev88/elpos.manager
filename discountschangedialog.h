@@ -17,7 +17,7 @@ public:
     explicit discountsChangeDialog(QWidget *parent = 0);
     ~discountsChangeDialog();
     void discountNew();
-    void discountEdit(int discountsID, QString discountsName, int discountsPercent);
+    void discountEdit(int discountsID, QString discountsName, QString discountsPercent);
 
 private:
     Ui::discountsChangeDialog *ui;
